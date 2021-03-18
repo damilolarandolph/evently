@@ -1,0 +1,46 @@
+.main-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.first-div {
+  display: flex;
+  padding: 20px 300px;
+  background-color: var(--tea-green);
+}
+
+.event-title {
+  color: var(--midnight-green-eagle-green);
+  font-size: 60px;
+}
+
+.main-section aside {
+  margin: auto 0 auto 30px;
+  flex: 1;
+}
+
+.main-section .first-div .preview-image {
+  border-radius: 10px;
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.main-section .first-div .preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.attend-button {
+  margin-top: 10px;
+}
+
+.event-badges {
+  margin: 10px 0px;
+}
+
+.event-details {
+  margin: 20px 0px;
+  line-height: 1.8;
+}

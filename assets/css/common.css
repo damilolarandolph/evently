@@ -1,0 +1,175 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+:root {
+  --midnight-green-eagle-green: #114b5fff;
+  --illuminating-emerald: #1a936fff;
+  --granny-smith-apple: #88d498ff;
+  --tea-green: #c6dabfff;
+  --champagne: #f3e9d2ff;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+  display: flex;
+  color: rgb(30, 92, 112);
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--midnight-green-eagle-green);
+}
+
+.ui-button {
+  padding: 20px 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--illuminating-emerald);
+  font-weight: bold;
+  color: var(--champagne);
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.badge {
+  background-color: var(--granny-smith-apple);
+  width: max-content;
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.badge i {
+  padding: 10px;
+  background-color: var(--illuminating-emerald);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.badges li {
+  margin: 0 10px;
+}
+
+.badge span {
+  padding: 10px;
+}
+
+.ui-button:hover {
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: var(--midnight-green-eagle-green);
+}
+
+nav h2 {
+  color: var(--champagne);
+  display: inline;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.search {
+  display: inline-block;
+}
+
+.search input {
+  width: 500px;
+  background-color: var(--illuminating-emerald);
+  padding: 9px;
+  border-radius: 3px;
+  font-weight: 700;
+  color: var(--champagne);
+  border: none;
+}
+
+.search input:focus {
+  border: 1px solid var(--champagne);
+
+  outline: none;
+}
+
+.button-group a {
+  color: var(--granny-smith-apple);
+  margin: 0px 5px 0px 5px;
+  font-weight: bold;
+}
+
+.button-group a:hover {
+  transition: color 0.5s;
+  color: var(--champagne);
+}
+
+.focus-popover-menu {
+  position: relative;
+}
+
+.avatar.focus-popover-menu {
+  border-radius: 4px;
+}
+
+.focus-popover-menu .menu {
+  display: none;
+  position: absolute;
+  right: 0px;
+  margin-top: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.focus-popover-menu:focus-within .menu {
+  display: block;
+}
+
+ul.menu li {
+  width: 100%;
+  text-align: left;
+  min-width: 100px;
+  display: block;
+  padding: 10px;
+  background-color: var(--illuminating-emerald);
+  font-weight: 600;
+}
+
+ul.menu li a {
+  color: var(--tea-green);
+}
+
+ul.menu li:hover {
+  background-color: var(--tea-green);
+}
+
+ul.menu li:hover a {
+  color: var(--midnight-green-eagle-green);
+}
+
+ul {
+  list-style: none;
+}
+
+button.avatar {
+  width: 45px;
+  height: 45px;
+}
+
+button {
+  border: none;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+}
