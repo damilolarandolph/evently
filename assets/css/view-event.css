@@ -44,3 +44,18 @@
   margin: 20px 0px;
   line-height: 1.8;
 }
+
+.other-info-section {
+  margin: 100px 0;
+  padding: 0 300px;
+}
+
+.other-info-section .info-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.other-info-section .info-cards li {
+  margin: 20px 10px;
+}

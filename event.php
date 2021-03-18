@@ -52,6 +52,40 @@
             </aside>
         </div>
     </section>
+    <section class="other-info-section">
+        <ul class="info-cards">
+            <li class="card mini">
+                <span class="title">Location</span>
+                <div class="body">
+                    Some cool body
+                </div>
+            </li>
+            <li class="card mini">
+                <span class="title">
+                    Speaker
+                </span>
+                <div class="body">some cool body</div>
+            </li>
+            <li class="card mini">
+                <span class="title">
+                    Speaker
+                </span>
+                <div class="body">some cool body</div>
+            </li>
+            <li class="card mini">
+                <span class="title">
+                    Speaker
+                </span>
+                <div class="body">some cool body</div>
+            </li>
+            <li class="card mini">
+                <span class="title">
+                    Speaker
+                </span>
+                <div class="body">some cool body</div>
+            </li>
+        </ul>
+    </section>
 </body>
 
 </html>
