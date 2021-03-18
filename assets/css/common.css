@@ -156,8 +156,9 @@ ul.menu li:hover a {
   color: var(--midnight-green-eagle-green);
 }
 
-ul {
+ul > li {
   list-style: none;
+  display: inline-block;
 }
 
 button.avatar {
@@ -172,4 +173,33 @@ button {
 .avatar-img {
   width: 100%;
   height: 100%;
+}
+
+.card {
+  background-color: var(--granny-smith-apple);
+  border-radius: 10px 10px 4px 4px;
+}
+
+.card.mini {
+  min-width: 250px;
+  overflow: hidden;
+  min-height: 200px;
+  height: 100%;
+}
+
+.card.mini .title {
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  color: var(--champagne);
+  width: 100%;
+  font-size: 25px;
+  background-color: var(--midnight-green-eagle-green);
+  padding: 20px 10px;
+}
+
+.card.mini .body {
+  margin-top: 20px;
+  font-style: oblique;
+  text-align: center;
 }
