@@ -15,83 +15,9 @@
 }
 
 .hero p {
-  color: var(--illuminating-emerald);
-  opacity: 0.5;
-  font-style: italic;
-  font-size: 40px;
-}
-
-.upcoming-event {
-  background-color: var(--champagne);
-  height: min-content;
-  max-width: 400px;
-  border-radius: 4px;
-  overflow: hidden;
-  cursor: pointer;
-
-  transition: transform 0.5s;
-}
-
-.upcoming-event:hover {
-  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transform: scale(1.05);
-}
-
-.upcoming-event main {
-  padding: 10px;
-}
-
-.upcoming-event .title {
-  font-size: 25px;
-  text-align: center;
-  margin-bottom: 10px;
-  color: var(--midnight-green-eagle-green);
-}
-
-.upcoming-event .event-image {
-  border-radius: 4px;
-  height: 300px;
-  width: 100%;
-}
-
-.upcoming-event .extra-details li {
-  margin: 10px 0px;
-  color: var(--midnight-green-eagle-green);
-}
-
-.upcoming-event .extra-details li svg {
-  color: var(--illuminating-emerald);
-}
-
-.upcoming-event .kitchen-sink {
-  background-color: var(--midnight-green-eagle-green);
-  padding: 10px;
-}
-
-.upcoming-event .kitchen-sink .item > p {
-  color: var(--granny-smith-apple);
-  font-size: 13px;
-  text-align: center;
-}
-
-.upcoming-event .kitchen-sink .item {
-  margin-bottom: 20px;
-}
-
-.upcoming-event .kitchen-sink .item:nth-child(odd):after {
-  content: "";
-  width: 100%;
-  height: 1px;
-  display: block;
-  margin-top: 10px;
-  opacity: 0.3;
-  background-color: var(--tea-green);
-}
-
-.upcoming-event .kitchen-sink .item h5 {
   color: var(--champagne);
-  text-align: center;
-  font-size: 50px;
+  opacity: 0.5;
+  font-size: 40px;
 }
 
 .home-section {
@@ -106,53 +32,8 @@
   border-bottom: 10px solid teal;
 }
 
-.home-section .content {
+.home-section > .content {
   margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
-}
-
-.preview-card {
-  background-color: var(--champagne);
-  width: max-content;
-  display: flex;
-  padding: 10px;
-  min-width: 450px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 20px 20px;
-  transition: all 0.2s;
-}
-
-.preview-card:hover {
-  transition: all 0.2s;
-  box-shadow: 10px 5px 40px rgba(17, 76, 95, 0.248);
-  border-left: 8px solid var(--illuminating-emerald);
-}
-
-.home-section .content .preview-card .image {
-  width: 100px;
-  height: 100%;
-  border-radius: 4px;
-  object-fit: cover;
-}
-
-.preview-card .content {
-  margin: 0 0 0 10px;
-  display: block;
-}
-
-.preview-card .content .title {
-  border: none;
-  font-size: 30px;
-  color: var(--midnight-green-eagle-green);
-}
-
-.preview-card .content .extra-details li {
-  margin: 7px 0px;
-  color: var(--illuminating-emerald);
-}
-
-.preview-card .content .extra-details li svg {
-  color: var(--granny-smith-apple);
 }
