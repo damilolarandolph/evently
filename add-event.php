@@ -100,17 +100,21 @@
 
 </body>
 <script src="/assets/js/common.js"></script>
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmM_a-0sPL6k12genP_RVor9iJ1AEupwI&libraries=places&callback=startMap">
-</script>
+
+<?php
+include_once __DIR__ . "/src/utils/keystore.php";
+$key = $Keystore->getKey(Keys::$GOOGLE_PLACES);
+?>
+
+<script async src="https://maps.googleapis.com/maps/api/js?key=<?php echo $key ?>&libraries=places&callback=startMap"></script>;
 <script>
     let searchBox;
-    let form = document.getElementById("add-form")
+    let form = document.getElementById(" add-form")
 
     function startMap(args) {
         let input = document.getElementById("map-suggestions")
         searchBox = new google.maps.places.SearchBox(input)
         console.log(searchBox)
-
         searchBox.addListener("places_changed", () => {
             const places = searchBox.getPlaces()
             form.elements["lat"].value = places[0].geometry.location.lat()
