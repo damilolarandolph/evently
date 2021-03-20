@@ -33,6 +33,14 @@ a {
   background-color: var(--midnight-green-eagle-green);
 }
 
+.head-nav .logo {
+  height: 50px;
+}
+
+.head-nav .logo img {
+  height: 100%;
+}
+
 .ui-button {
   padding: 20px 40px;
   border-radius: 4px;
@@ -474,4 +482,41 @@ option {
 
 .sidebar-routes > * {
   display: none;
+}
+
+.ui-link {
+  color: var(--illuminating-emerald);
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ui-link:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 0px;
+  background-color: var(--midnight-green-eagle-green);
+}
+
+.ui-link:hover::after {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 100%;
+}
+
+.ui-link:hover {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  color: var(--midnight-green-eagle-green);
+}
+
+.ui-link.muted {
+  color: var(--tea-green);
+}
+
+.ui-link.muted:hover {
+  color: var(--illuminating-emerald);
+}
+
+.ui-link.muted:after {
+  background-color: var(--illuminating-emerald);
 }
