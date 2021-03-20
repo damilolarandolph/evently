@@ -22,9 +22,9 @@
             <p>Our wide selection of events</p>
         </div>
         <div class="upcoming-event">
-            <main>
+            <main class="content">
                 <h4 class="title">Event Title</h4>
-                <img class="event-image" src="/assets/images/placeholder_avatar.jpg" </div>
+                <img class="event-image" src="/assets/images/placeholder_avatar.jpg" />
                 <ul class="extra-details">
                     <li>
                         <i class="far fa-clock"></i>
@@ -51,6 +51,7 @@
                 </div>
 
             </div>
+        </div>
     </section>
     <section class="home-section">
         <h4 class="title">Upcoming Events</h4>
