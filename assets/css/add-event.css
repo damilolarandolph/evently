@@ -28,7 +28,7 @@
   height: 400px;
 }
 
-form * {
+.form * {
   width: 100%;
   margin: 10px 0;
 }
