@@ -56,4 +56,19 @@
         }
 
     }
-})()
+})();
+
+(function () {
+
+    const timeLists = document.querySelectorAll(".time-list");
+    let innerHTML = ""
+    for (let start = 0; start < 24; ++start) {
+        innerHTML += `<option> ${start < 10 ? '0' : ''}${start}:00 </option>`
+        innerHTML += `<option>${start < 10 ? '0' : ''}${start}:30 </option>`
+    }
+
+    for (let list of timeLists) {
+        list.innerHTML = innerHTML
+    }
+
+})();
