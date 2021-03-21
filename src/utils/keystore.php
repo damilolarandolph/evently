@@ -1,13 +1,12 @@
 <?php
 
-
-
-
-
 class Keys
 {
     static $GOOGLE_PLACES = "GOOGLE_PLACES_API_KEY";
-
+    static $MYSQL_HOST = "MYSQL_HOST";
+    static $MYSQL_USER = "MYSQL_USER";
+    static $MYSQL_PASSWORD = "MYSQL_PASSWORD";
+    static $MYSQL_DATABASE = "MYSQL_DATABASE";
     private $keys;
 
     public function __construct()

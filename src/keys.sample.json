@@ -1,3 +1,7 @@
 {
-    "GOOGLE_PLACES_API_KEY": ""
+    "GOOGLE_PLACES_API_KEY": "",
+    "MYSQL_USER": "",
+    "MYSQL_HOST": "",
+    "MYSQL_PASSWORD": "",
+    "MYSQL_DATABASE": ""
 }
