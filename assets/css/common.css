@@ -108,6 +108,26 @@ nav h2 {
 
   outline: none;
 }
+.search.wide {
+  display: block;
+}
+
+.search.search-button {
+  display: flex;
+}
+
+.search.search-button input {
+  margin-right: 30px;
+}
+
+.search.alt-ring input:focus {
+  border: 2px solid var(--granny-smith-apple);
+}
+
+.search.wide input {
+  width: 100%;
+  padding: 14px;
+}
 
 .button-group a {
   color: var(--granny-smith-apple);
@@ -139,6 +159,12 @@ nav h2 {
 
 .focus-popover-menu:focus-within .menu {
   display: block;
+}
+
+.layout {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 ul.menu li {
@@ -242,7 +268,11 @@ option {
   width: 100%;
 }
 
-.form .form-group > label:first-child {
+.form .form-group.inline {
+  width: max-content;
+}
+
+.form .form-group > label:first-child:not(.radio) {
   display: block;
   width: max-content;
   font-weight: bold;
@@ -256,24 +286,26 @@ option {
 
 .form .form-groups {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
   width: 100%;
 }
 
-.form .form-groups .form-group:nth-child(odd) {
-  margin-right: 20px;
+.form .form-groups .form-group:not(:last-child) {
+  margin-right: 50px;
 }
 
-.radio input[type="radio"] {
+.radio :is(input[type="radio"], input[type="checkbox"]) {
   opacity: 0;
   position: absolute;
   width: max-content;
 }
 
-.radio input[type="radio"] ~ .content i {
+.radio :is(input[type="radio"], input[type="checkbox"]) ~ .content i {
   display: none;
 }
 
-.radio input[type="radio"] ~ .content {
+.radio :is(input[type="radio"], input[type="checkbox"]) ~ .content {
   background-color: var(--tea-green);
   width: max-content;
   padding: 10px;
@@ -282,13 +314,13 @@ option {
   color: var(--illuminating-emerald);
 }
 
-.radio input[type="radio"]:checked ~ .content {
+.radio :is(input[type="radio"], input[type="checkbox"]):checked ~ .content {
   font-weight: bold;
   background-color: var(--illuminating-emerald);
   color: var(--champagne);
 }
 
-.radio input[type="radio"]:checked ~ .content * {
+.radio :is(input[type="radio"], input[type="checkbox"]):checked ~ .content * {
   display: inline;
 }
 
@@ -297,11 +329,15 @@ option {
   width: max-content;
   display: flex;
   padding: 10px;
-  min-width: 450px;
+  width: 350px;
   border-radius: 4px;
   cursor: pointer;
-  margin: 20px 20px;
   transition: all 0.2s;
+}
+
+.preview-card {
+  margin-right: 30px;
+  margin-top: 30px;
 }
 
 .preview-card:hover {
