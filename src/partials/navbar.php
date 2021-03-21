@@ -4,9 +4,11 @@
             <img src="/assets/images/logo.png" />
         </a>
     </div>
-    <div class="search">
-        <input placeholder="Search for events...." type="text" />
-    </div>
+    <form method="GET" action="/search.php">
+        <div class="search">
+            <input placeholder="Search for events...." type="text" />
+        </div>
+    </form>
     <div>
         <div class="button-group">
             <a title="Login as user or organizer" href="/signin.php">Login</a>
