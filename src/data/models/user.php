@@ -13,6 +13,34 @@ class User extends Model
         parent::__construct("user");
     }
 
+    /**
+     * 
+     * Constructs a new User object with the provided 
+     * parameters.
+     * 
+     * @param string $email
+     * @param string $password
+     * @param string phone
+     * @param boolean $isOrganizer
+     *
+     * @return User 
+     */
+    public static function withArgs(
+        $email,
+        $password,
+        $phone,
+        $isOrganizer = FALSE
+    ) {
+
+        $user = new self;
+        $user->email = $email;
+        $user->phone = $phone;
+        $user->setPassword($password);
+        $user->isOrganizer = $isOrganizer;
+
+        return $user;
+    }
+
     public function getPassword()
     {
         return $this->password;
@@ -20,7 +48,8 @@ class User extends Model
 
     public function setPassword($password)
     {
-        $this->$password = password_hash($password, PASSWORD_DEFAULT);
+
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
 
