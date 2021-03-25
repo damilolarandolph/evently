@@ -35,6 +35,8 @@ class Person extends Model
         $person->user = $user;
         $person->lastName = $lastName;
         $person->firstName = $firstName;
+
+        return $person;
     }
 
     public function __set($name, $value)
