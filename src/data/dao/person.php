@@ -57,11 +57,25 @@ class PersonDAO extends DAO
     public function save($model)
     {
         $model->user->isOrganizer = FALSE;
-        $user = $this->userDAO->save($model->user);
-        $q = "INSERT INTO {$this->table} (user, name) " .
-            "VALUES (?,?)";
-        $stmt = $this->conn->prepare($q);
-        $stmt->execute(array($user->email, $model->name));
+        $this->conn->beginTransaction();
+        try {
+            $user = $this->userDAO->save($model->user);
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            throw $e;
+        }
+
+        try {
+            $q = "INSERT INTO {$this->table} (user, first_name, last_name) " .
+
+                "VALUES (?,?,?)";
+            $stmt = $this->conn->prepare($q);
+            $stmt->execute(array($user->email, $model->firstName, $model->lastName));
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            throw $e;
+        }
+        $this->conn->commit();
         $organizer = $this->findById($user->email);
         return $organizer;
     }
