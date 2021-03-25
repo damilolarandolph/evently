@@ -16,6 +16,7 @@ body {
   --granny-smith-apple: #88d498ff;
   --tea-green: #c6dabfff;
   --champagne: #f3e9d2ff;
+  --error-red: rgb(255, 58, 101);
 }
 
 a {
@@ -264,6 +265,10 @@ option {
   border: 2px solid var(--illuminating-emerald);
 }
 
+.form .form-group.has-errors :is(textarea, input) {
+  border: 2px solid var(--error-red);
+}
+
 .form .form-group {
   width: 100%;
 }
@@ -282,6 +287,17 @@ option {
   border-bottom: 2px solid;
   line-height: 30px;
   border-color: var(--illuminating-emerald);
+}
+
+.form .form-group .error {
+  font-size: 12px;
+  display: none;
+  color: var(--error-red);
+  text-align: left;
+}
+
+.form .form-group.has-errors .error {
+  display: block;
 }
 
 .form .form-groups {
