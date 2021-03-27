@@ -52,6 +52,20 @@ class User extends Model
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
+    /**
+     * Confirms plaintext input password to the saved saved hashed password.
+     * Returns true or false based on whether the passwords match.
+     * 
+     * @param string $comparePassword The plaintext password
+     * 
+     * @return boolean
+     * 
+     */
+    public function verifyPassword($comparePassword)
+    {
+        return password_verify($comparePassword, $this->password);
+    }
+
 
     public function __set($name, $value)
     {
