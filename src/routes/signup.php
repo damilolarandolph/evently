@@ -17,7 +17,7 @@ $checker = FieldTester::withArgs($_POST, array(
         (Test::$exists)(),
         (Test::$isEqualTo)("password")
     )),
-));
+), array());
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $checker->test();
