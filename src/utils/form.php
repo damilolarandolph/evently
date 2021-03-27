@@ -7,13 +7,15 @@ class FieldTester
     private $data;
     /** @var TestItem[] */
     private $tests;
+    private $after;
     private $foundErrors = false;
 
-    public static function withArgs($data, $tests)
+    public static function withArgs($data, $tests, $afterTests)
     {
         $check = new self;
         $check->data = $data;
         $check->tests = $tests;
+        $check->after = $afterTests;
         return $check;
     }
 
@@ -55,6 +57,10 @@ class FieldTester
         foreach ($this->tests as $test) {
             $test->test($this->data, $this);
         }
+
+        foreach ($this->after as $test) {
+            $test->test($this->data, $this);
+        }
     }
 
     public function setFoundErrors($val)
@@ -70,6 +76,12 @@ class FieldTester
     public function getField($name)
     {
         foreach ($this->tests as $test) {
+            if ($test->field == $name) {
+                return $test;
+            }
+        }
+
+        foreach ($this->after as $test) {
             if ($test->field == $name) {
                 return $test;
             }
@@ -98,9 +110,12 @@ class TestItem
      */
     public function test($map, $tester)
     {
-        $this->data = $map[$this->field];
+        if (isset($map[$this->field])) {
+            $this->data = $map[$this->field];
+        }
+
         foreach ($this->tests as $test) {
-            $result = $test($this->field, $map);
+            $result = $test($this->field, $map, $tester);
             if ($result !== true) {
                 $this->error = $result;
                 $this->hasErrors = true;
@@ -119,6 +134,7 @@ class Test
     public static $isEmail;
     public static $isEqualTo;
     public static $emailIsUnique;
+    public static $testFunction;
 }
 
 /**
@@ -192,5 +208,14 @@ Test::$emailIsUnique = function () {
             return "email already exists";
         }
         return true;
+    };
+};
+
+/**
+ * 
+ */
+Test::$testFunction = function ($func) {
+    return function ($key, $map, $tester) use ($func) {
+        return ($func)($key, $map, $tester);
     };
 };
