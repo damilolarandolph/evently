@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php require_once __DIR__ . "/src/routes/signup-org.php"; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -11,31 +12,36 @@
     <link rel="stylesheet" href="./assets/css/all.min.css" />
     <link rel="stylesheet" href="./assets/css/common.css" />
     <link rel="stylesheet" href="/assets/css/auth.css" />
-    <title>User Signup</title>
+    <title>Organizer Signup</title>
 </head>
 
 <body class="layout">
     <main class="auth-form">
-        <form class="form">
+        <form class="form <?php $checker->getFoundErrors() ? print("has-errors") : ""; ?>" method="POST" action="">
             <div class="form-group">
                 <label>Organization Name</label>
-                <input placeholder="enter last name..." />
+                <input placeholder="enter last name..." name="name" value="<?php print($checker->getFieldData("name")); ?>" />
+                <p class="error"><?php print($checker->getFieldError("name")); ?></p>
             </div>
             <div class="form-group">
                 <label>Phone Number</label>
-                <input type="tel" placeholder="enter phone number..." />
+                <input type="tel" name="phone" value="<?php print($checker->getFieldData("phone")); ?>" placeholder="enter phone number..." />
+                <p class="error"><?php print($checker->getFieldError("phone")); ?></p>
             </div>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" placeholder="enter email..." />
+                <input type="email" name="email" value="<?php print($checker->getFieldData("email")); ?>" placeholder="enter email..." />
+                <p class="error"><?php print($checker->getFieldError("email")); ?></p>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" placeholder="enter password..." />
+                <input type="password" name="password" value="<?php print($checker->getFieldData("password")); ?>" placeholder="enter password..." />
+                <p class="error"><?php print($checker->getFieldError("password")); ?></p>
             </div>
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" placeholder="enter password..." />
+                <input type="password" name="confirmPassword" value="<?php print($checker->getFieldData("confirmPassword")); ?>" placeholder="enter password..." />
+                <p class="error"><?php print($checker->getFieldError("confirmPassword")); ?></p>
             </div>
             <div class="row">
                 <button type="submit" class="ui-button">
