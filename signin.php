@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+require_once __DIR__ . "/src/routes/signin.php";
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -16,14 +19,19 @@
 
 <body class="layout">
     <main class="auth-form">
-        <form class="form">
+        <form method="POST" class="form <?php $checker->getFoundErrors() ? print("has-errors") : ""; ?>">
+            <div class="form-group">
+                <p class="error"><?php print($checker->getFieldError("auth-error")); ?></p>
+            </div>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" placeholder="enter email..." />
+                <input value="<?php print($checker->getFieldData("email")) ?>" type="email" name="email" placeholder="enter email..." />
+                <p class="error"><?php print($checker->getFieldError("email")) ?></p>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" placeholder="enter password..." />
+                <input type="password" name="password" placeholder="enter password..." />
+                <p class="error"><?php print($checker->getFieldError("password")) ?></p>
             </div>
 
             <div class="row">
