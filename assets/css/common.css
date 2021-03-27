@@ -260,6 +260,12 @@ option {
   border: none;
 }
 
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
 .form :is(textarea, input):focus {
   outline: none;
   border: 2px solid var(--illuminating-emerald);
@@ -296,6 +302,7 @@ option {
   text-align: left;
 }
 
+.form.has-errors .form-group .error,
 .form .form-group.has-errors .error {
   display: block;
 }
