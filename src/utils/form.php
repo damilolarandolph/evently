@@ -37,8 +37,10 @@ class FieldTester
 
     public function getFieldData($fieldName)
     {
-
-        return $this->getField($fieldName)->data;
+        if (isset($this->data[$fieldName])) {
+            return $this->data[$fieldName];
+        }
+        return "";
     }
 
     public function getFieldError($fieldName)
@@ -135,6 +137,8 @@ class Test
     public static $isEqualTo;
     public static $emailIsUnique;
     public static $testFunction;
+    public static $isTodayOrLater;
+    public static $dateIsGreaterThan;
 }
 
 /**
@@ -217,5 +221,35 @@ Test::$emailIsUnique = function () {
 Test::$testFunction = function ($func) {
     return function ($key, $map, $tester) use ($func) {
         return ($func)($key, $map, $tester);
+    };
+};
+
+/**
+ * @return string|boolean
+ */
+Test::$isTodayOrLater = function ($startDate, $startTime) {
+    return function ($key, $map, $tester) use ($startDate, $startTime) {
+        $startDateTime  = strtotime("{$map[$startDate]} {$map[$startTime]}");
+        $date = time();
+        if ($date > $startDateTime) {
+            return "Date should be greater than current time";
+        }
+        return true;
+    };
+};
+
+
+/**
+ * @return string|boolean 
+ */
+Test::$dateIsGreaterThan = function ($startDate, $startTime, $endDate, $endTime) {
+    return function ($key, $map, $tester) use ($startDate, $startTime, $endDate, $endTime) {
+        $startDateTime  = strtotime("{$map[$startDate]} {$map[$startTime]}");
+        $endDateTime  = strtotime("{$map[$endDate]} {$map[$endTime]}");
+
+        if ($startDateTime >= $endDateTime) {
+            return "End date and time should be greater than start date and time";
+        }
+        return true;
     };
 };
