@@ -8,9 +8,14 @@
         let tabsContainer = document.querySelector(`#${id}`);
         let tabs = document.querySelectorAll(`#${id} > *`)
         let radios = trigger.querySelectorAll(":scope .radio input")
+        let hasSelected = false;
         for (let index = 0; index < radios.length && index < tabs.length; ++index) {
-            tabs[index].style.display = 'none'
-            radios[index].checked = false;
+            if (!radios[index].classList.contains("selected")) {
+                tabs[index].style.display = 'none'
+                radios[index].checked = false;
+            } else {
+                hasSelected = false;
+            }
             radios[index].addEventListener("change", function (event) {
                 for (let tab of tabsContainer.children) {
                     tab.style.display = 'none'
@@ -19,8 +24,10 @@
             })
 
         }
-        radios[0].checked = true
-        tabs[0].style.display = ''
+        if (!hasSelected) {
+            radios[0].checked = true
+            tabs[0].style.display = ''
+        }
     }
 })();
 
