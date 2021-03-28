@@ -25,13 +25,49 @@ class Event extends Model
         parent::__construct("event");
     }
 
+    public static function withArgs(
+        $name,
+        $tickets,
+        $startTime,
+        $endTime,
+        $speaker,
+        $description,
+        $organizer,
+        $type,
+        $category,
+        $image,
+        $isOnline = true,
+        $meetingLink = "",
+        $longitude = "",
+        $latitude = "",
+        $location = "",
+    ) {
+        $event = new self;
+        $event->name = $name;
+        $event->tickets = intval($tickets);
+        $event->image = $image == "" ? "/assets/placeholder_avatar.jpg" : $image;
+        $event->startTime  = $startTime;
+        $event->endTime = $endTime;
+        $event->speaker = $speaker;
+        $event->isOnline = $isOnline;
+        $event->meetingLink = $meetingLink;
+        $event->description = $description;
+        $event->organizer = $organizer;
+        $event->longitude = $longitude;
+        $event->latitude = $latitude;
+        $event->location = $location;
+        $event->type = $type;
+        $event->category = $category;
+        return $event;
+    }
+
     public function __set($name, $value)
     {
         switch ($name) {
-            case 'start-time':
+            case 'start_time':
                 $this->startTime = $value;
                 break;
-            case "end-time":
+            case "end_time":
                 $this->endTime = $value;
                 break;
             case "meetingLink":
