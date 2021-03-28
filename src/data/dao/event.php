@@ -64,17 +64,18 @@ class EventDAO extends DAO
          latitude,
          location,
          type,
-         category) " .
+         category) VALUES " .
             "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $this->conn->prepare($q);
-        $res =           $stmt->execute(array(
+        $res =       $stmt->execute(array(
+            $model->name,
             $model->tickets,
             $model->image,
             $model->startTime,
             $model->endTime,
             $model->speaker,
-            $model->isOnline,
+            (int) $model->isOnline,
             $model->meetingLink,
             $model->description,
             $model->organizer->user->email,
