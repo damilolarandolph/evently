@@ -29,7 +29,8 @@ class EventTypeDAO extends DAO
         $q = "SELECT * FROM {$this->table} WHERE id=?";
         $stmt = $this->conn->prepare($q);
         $stmt->execute(array($id));
-        $res = $stmt->fetch(null, "EventType");
+        $stmt->setFetchMode(PDO::FETCH_CLASS, "EventType");
+        $res = $stmt->fetch();
         return $res;
     }
 

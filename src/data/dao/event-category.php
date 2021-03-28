@@ -26,7 +26,8 @@ class EventCategoryDAO extends DAO
         $q = "SELECT * FROM {$this->table} WHERE id=?";
         $stmt = $this->conn->prepare($q);
         $stmt->execute(array($id));
-        $res = $stmt->fetch(null, "EventCategory");
+        $stmt->setFetchMode(PDO::FETCH_CLASS, "EventCategory");
+        $res = $stmt->fetch();
         return $res;
     }
 
