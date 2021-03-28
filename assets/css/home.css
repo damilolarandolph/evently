@@ -21,19 +21,22 @@
 }
 
 .home-section {
-  margin: 100px 0px 50px 0px;
+  margin: 100px auto 50px auto;
   padding: 0px 70px;
+  width: max-content;
 }
 
 .home-section .title {
-  font-size: 60px;
+  font-size: 30px;
   display: inline-block;
   color: var(--granny-smith-apple);
-  border-bottom: 10px solid teal;
+  border-bottom: 5px solid teal;
 }
 
 .home-section > .content {
   margin-top: 40px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
   flex-wrap: wrap;
 }

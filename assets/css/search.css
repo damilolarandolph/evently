@@ -13,6 +13,10 @@
   color: var(--granny-smith-apple);
 }
 
+.form-groups.options {
+  align-items: flex-end;
+}
+
 .search-header .query::after {
   content: close-quote;
   color: var(--granny-smith-apple);
@@ -39,6 +43,8 @@
 
 .results {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 0px;
   flex-wrap: wrap;
 }
