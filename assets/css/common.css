@@ -279,6 +279,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
 }
 
+.form .form-group .hint {
+  color: var(--tea-green);
+  font-style: italic;
+  font-size: 14px;
+}
+
 .form .form-group.inline {
   width: max-content;
 }
@@ -293,6 +299,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-bottom: 2px solid;
   line-height: 30px;
   border-color: var(--illuminating-emerald);
+}
+.form .form-group.required > label:first-child:not(.radio)::after {
+  content: "*";
+  color: var(--error-red);
 }
 
 .form .form-group .error {
@@ -309,7 +319,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .form .form-groups {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
 }
@@ -351,10 +361,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: var(--champagne);
   width: max-content;
   display: flex;
-  padding: 10px;
+  flex-direction: column;
   width: 350px;
+  padding-bottom: 20px;
   border-radius: 4px;
   cursor: pointer;
+  height: 100%;
   transition: all 0.2s;
 }
 
@@ -366,12 +378,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .preview-card:hover {
   transition: all 0.2s;
   box-shadow: 10px 5px 40px rgba(17, 76, 95, 0.248);
-  border-left: 8px solid var(--illuminating-emerald);
+  border: 2px solid var(--illuminating-emerald);
 }
 
 .preview-card .image {
-  width: 100px;
-  height: 100%;
+  width: 100%;
+  height: 200px;
   border-radius: 4px;
   object-fit: cover;
 }
@@ -383,12 +395,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .preview-card .content .title {
   border: none;
-  font-size: 30px;
+  margin: 10px 0;
+  font-size: 20px;
   color: var(--midnight-green-eagle-green);
 }
 
 .preview-card .content .extra-details li {
-  margin: 7px 0px;
+  margin: 8px 0px;
   display: block;
   color: var(--illuminating-emerald);
 }
