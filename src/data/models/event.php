@@ -45,7 +45,7 @@ class Event extends Model
         $event = new self;
         $event->name = $name;
         $event->tickets = intval($tickets);
-        $event->image = $image == "" ? "/assets/placeholder_avatar.jpg" : $image;
+        $event->image = $image == "" ? "/assets/images/placeholder_avatar.jpg" : $image;
         $event->startTime  = $startTime;
         $event->endTime = $endTime;
         $event->speaker = $speaker;
