@@ -6,12 +6,9 @@ require_once __DIR__ . "/../models/event-type.php";
 
 class EventTypeDAO extends DAO
 {
-    /** @var EventDAO */
-    private $eventDAO;
 
     public function __construct($pdoConn)
     {
-        $this->eventDAO = new EventDAO($pdoConn);
         parent::__construct($pdoConn, "event_type");
     }
 
