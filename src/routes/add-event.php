@@ -94,6 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $eventDAO = new EventDAO(PDOConn::instance());
         $eventCategoryDAO = new EventCategoryDAO(PDOConn::instance());
         $eventTypeDAO = new EventTypeDAO(PDOConn::instance());
+        $eventDAO->init();
+        $eventCategoryDAO->init();
+        $eventTypeDAO->init();
         $event = Event::withArgs(
             $checker->getFieldData("title"),
             $checker->getFieldData('tickets'),

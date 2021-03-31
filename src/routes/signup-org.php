@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ), $_POST['name']);
 
         $organizerDAO = new OrganizerDAO(PDOConn::instance());
+        $organizerDAO->init();
         $organizerDAO->save($organizer);
         header("Location: /signin.php");
     }

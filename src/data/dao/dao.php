@@ -14,6 +14,10 @@ abstract class DAO
         $this->conn = $pdoConn;
         $this->table = $table;
     }
+
+    public function init()
+    {
+    }
     /**
      * Returns a single instance of the object from the database filtered by
      * a primary key.

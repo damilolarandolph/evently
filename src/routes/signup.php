@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ), $_POST["firstName"], $_POST["lastName"]);
 
         $personDAO = new PersonDAO(PDOConn::instance());
+        $personDAO->init();
         $personDAO->save($person);
         header("Location: /signin.php");
     }

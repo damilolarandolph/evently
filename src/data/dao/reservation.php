@@ -3,22 +3,30 @@
 require_once __DIR__ . "/../models/reservation.php";
 require_once __DIR__ . "/dao.php";
 require_once __DIR__ . "/event.php";
+require_once  __DIR__ . "/../models/event.php";
+require_once __DIR__ . "/person.php";
 
 class ReservationDAO extends DAO
 {
-    /** @var EventDAO */
-    private $eventDAO;
 
-    /** @var PersonDAO */
+    private $eventDAO;
     private $personDAO;
+
 
     public function __construct($pdoConn)
     {
-
         parent::__construct($pdoConn, "reservation");
-        $this->eventDAO = new EventDAO($pdoConn);
-        $this->personDAO = new PersonDAO($pdoConn);
     }
+
+
+    public function init()
+    {
+        $this->eventDAO = new EventDAO($this->conn);
+        $this->eventDAO->init();
+        $this->personDAO = new PersonDAO($this->conn);
+        $this->personDAO->init();
+    }
+
 
     /**
      * {@inheritDoc}
@@ -79,5 +87,31 @@ class ReservationDAO extends DAO
     public function update($model)
     {
         $this->save($model);
+    }
+
+    /**
+     * Get number of reservation for account
+     * 
+     * @param Event $event
+     * 
+     * @return int
+     */
+    public function reservationCountForEvent($event)
+    {
+        $q = "SELECT COUNT(*) FROM {$this->table} WHERE event=?";
+        $stmt = $this->conn->prepare($q);
+        $stmt->execute($event->id);
+        return $stmt->fetchColumn();
+    }
+
+    public function getReservationsForEvent($event)
+    {
+        $q = "SELECT * FROM {$this->table} WHERE event=?";
+        $stmt = $this->conn->prepare($q);
+        $reservations = $stmt->fetchAll(PDO::FETCH_CLASS, "Reservation");
+        foreach ($reservations as $reservation) {
+            $reservation->event = $event;
+        }
+        return $reservations;
     }
 }

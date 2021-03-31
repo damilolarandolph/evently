@@ -207,6 +207,7 @@ Test::$isEqualTo = function ($comparisonKey) {
  */
 Test::$emailIsUnique = function () {
     $userDao = new UserDAO(PDOConn::instance());
+    $userDao->init();
     return function ($key, $map) use ($userDao) {
         if ($userDao->emailExists($map[$key])) {
             return "email already exists";

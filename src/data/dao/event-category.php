@@ -5,14 +5,13 @@ require_once __DIR__ . "/event.php";
 
 class EventCategoryDAO extends DAO
 {
-    /** @var EventDAO */
-    private $eventDAO;
+
 
     public function __construct($pdoConn)
     {
         parent::__construct($pdoConn, "event_category");
-        $this->eventDAO = new EventDAO($pdoConn);
     }
+
 
     /**
      * {@inheritDoc}

@@ -31,6 +31,9 @@ $checker = FieldTester::withArgs($_POST, array(
                 $userDAO = new UserDAO(PDOConn::instance());
                 $orgDAO = new OrganizerDAO(PDOConn::instance());
                 $personDAO = new PersonDAO(PDOConn::instance());
+                $userDAO->init();
+                $orgDAO->init();
+                $personDAO->init();
                 $user = $userDAO->findById($map["email"]);
                 if ($user === false) {
                     var_dump($user);
