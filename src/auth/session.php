@@ -22,7 +22,7 @@ class Session
 
     public static function hasInstance()
     {
-        return Session::$instance == NULL;
+        return Session::$instance !== NULL;
     }
 }
 
@@ -40,6 +40,7 @@ function getSession()
         $dao = $_SESSION["isOrganizer"] == 1 ?
             new OrganizerDAO(PDOConn::instance())
             : new PersonDAO(PDOConn::instance());
+        $dao->init();
         $user = $dao->findById($_SESSION["user"]);
         $session = Session::instance();
         $session->user = $user;
