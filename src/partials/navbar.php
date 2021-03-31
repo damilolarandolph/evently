@@ -1,3 +1,29 @@
+<?php
+require_once __DIR__ . "/../auth/session.php";
+
+function buildOrganizerOptions()
+{
+    $name = getSession()->user->name;
+    return "<ul class='menu'>
+                <li class='fixed'><a>{$name}</a></li>
+                <li><a href=''>Account</a></li>
+                <li><a href='/add-event.php'>Create Event</a></li>
+                <li><a href=''>Logout</a></li>
+            </ul>";
+}
+
+function buildPersonOptions()
+{
+    $name = getSession()->user->firstName . " " . getSession()->lastName;
+    return "<ul class='menu'>
+                <li><a>{$name}</a></li>
+                <li><a href=''>Account</a></li>
+                <li><a href=''>Logout</a></li>
+            </ul>";
+}
+
+?>
+
 <nav class="head-nav">
     <div class="logo">
         <a href="/">
@@ -10,17 +36,20 @@
         </div>
     </form>
     <div>
-        <div class="button-group">
-            <a title="Login as user or organizer" href="/signin.php">Login</a>
-            <a title="Register as a user" href="/signup.php">Register</a>
-            <a title="Join Evently as an organizer" href="/org-signup.php">Become an Organizer</a>
-        </div>
-        <!-- <button class="avatar focus-popover-menu">
-            <img class="avatar-img" src="/assets/images/placeholder_avatar.jpg">
-            <ul class="menu">
-                <li><a href="">Account</a></li>
-                <li><a href="">Logout</a></li>
-            </ul>
-        </button> -->
+        <?php
+        $options = getSession() !== false ?  (getSession()->user instanceof Organizer  ?  buildOrganizerOptions() : buildPersonOptions()) : "";
+        if (getSession() === false) {
+            echo "<div class='button-group'>
+            <a title='Login as user or organizer' href='/signin.php'>Login</a>
+            <a title='Register as a user' href='/signup.php'>Register</a>
+            <a title='Join Evently as an organizer' href='/org-signup.php'>Become an Organizer</a>
+        </div>";
+        } else {
+            echo "<button class='avatar focus-popover-menu'>
+            <img class='avatar-img' src='/assets/images/placeholder_avatar.jpg'>
+            {$options}
+        </button>";
+        }
+        ?>
     </div>
 </nav>
