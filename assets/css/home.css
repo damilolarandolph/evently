@@ -1,5 +1,5 @@
 .hero {
-  background-image: url("/assets/images/banner-img.jpg");
+  background-image: url("/assets/images/banner_img2.jpg");
   background-position: center;
   background-size: cover;
   display: flex;
@@ -37,6 +37,7 @@
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 30px 0px;
   justify-content: center;
   flex-wrap: wrap;
 }
