@@ -17,7 +17,7 @@ class EventTypeDAO extends DAO
      *
      * @param int $id
      * 
-     * @return EventType
+     * @return EventType|false
      *  
      */
     public function findById($id)
@@ -26,6 +26,9 @@ class EventTypeDAO extends DAO
         $q = "SELECT * FROM {$this->table} WHERE id=?";
         $stmt = $this->conn->prepare($q);
         $stmt->execute(array($id));
+        if ($stmt->rowCount() == 0) {
+            return false;
+        }
         $stmt->setFetchMode(PDO::FETCH_CLASS, "EventType");
         $res = $stmt->fetch();
         return $res;

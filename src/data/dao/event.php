@@ -127,7 +127,7 @@ class EventDAO extends DAO
      * 
      * @param Event $event
      */
-    private function hydrateEvent($event)
+    private function hydrateEvent(&$event)
     {
         $event->type = $this->eventTypeDAO->findById($event->type);
         $event->category = $this->eventCategoryDAO->findById($event->category);
@@ -139,9 +139,9 @@ class EventDAO extends DAO
      * 
      * @param Event[]
      */
-    private function hydrateEvents($events)
+    private function hydrateEvents(&$events)
     {
-        foreach ($events as $event) {
+        foreach ($events as &$event) {
             $this->hydrateEvent($event);
         }
     }
@@ -173,9 +173,7 @@ class EventDAO extends DAO
      * Query for events. 
      * 
      * @param string $queryString
-     * @param int $fromDate
-     * @param int $fromTime
-     * @param boolean $online
+     * @param int $fromTimestamp unix timestamp
      * @param EventType $eventType
      * @param EventCategory $eventCategory
      * 
@@ -184,11 +182,39 @@ class EventDAO extends DAO
      */
     public function query(
         $queryString,
-        $fromDate,
-        $fromTime,
-        $online,
         $eventType,
-        $eventCategory
+        $eventCategory,
+        $fromTimestamp = 0,
     ) {
+
+        $queryString = strtolower($queryString);
+
+        // Making sure that the time constraint is from the current time
+        // and not in the past.
+        $fromTimestamp = $fromTimestamp < time() ? time() : $fromTimestamp;
+        $q = "SELECT * FROM {$this->table} WHERE name LIKE CONCAT('%', :query, '%') AND start_time > :startTime";
+        $paramsArr = array("query" => $queryString, "startTime" => $fromTimestamp);
+        if ($eventType !== null) {
+            $type = $this->eventTypeDAO->findById(intval($eventType));
+            if ($type !== false) {
+                $q = $q . " AND type = :eventType";
+                $paramsArr['eventType'] = $type->id;
+            }
+        }
+
+        if ($eventCategory !== null) {
+            $cat = $this->eventCategoryDAO->findById(intval($eventType));
+            if ($cat !== false) {
+                $q = $q . " AND category = :eventCategory";
+                $paramsArr['eventCategory'] = $cat->id;
+            }
+        }
+
+
+        $stmt = $this->conn->prepare($q);
+        $stmt->execute($paramsArr);
+        $res = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
+        $this->hydrateEvents($res);
+        return $res;
     }
 }
