@@ -30,11 +30,15 @@ function buildPersonOptions()
             <img src="/assets/images/logo.png" />
         </a>
     </div>
-    <form method="GET" action="/search.php">
+    <?php
+    if (!str_contains($_SERVER["REQUEST_URI"], "search")) {
+        echo '<form method="GET" action="/search.php">
         <div class="search">
-            <input placeholder="Search for events...." type="text" />
+            <input name="query" placeholder="Search for events...." type="text" />
         </div>
-    </form>
+    </form>';
+    }
+    ?>
     <div>
         <?php
         $options = getSession() !== false ?  (getSession()->user instanceof Organizer  ?  buildOrganizerOptions() : buildPersonOptions()) : "";
