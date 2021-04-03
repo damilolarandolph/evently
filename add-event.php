@@ -360,7 +360,6 @@ $key = $Keystore->getKey(Keys::$GOOGLE_PLACES);
         }
     });
 
-    form
     document.querySelectorAll("input[name='venue']").forEach((elem) => {
         elem.addEventListener('change', function(event) {
             if (event.target.value == 'physical') {
