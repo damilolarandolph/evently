@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+require_once __DIR__ . "/src/routes/search.php";
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -24,25 +27,75 @@
     <div class="layout">
         <main>
             <section class="search-header">
-                <h2 class="query">Food and Drink</h2>
-                <small class="events-found">15 events found</small>
-                <form class="form">
+                <h2 id="actualQuery" class="query">Food and Drink</h2>
+                <small id="resCount" class="events-found">15 events found</small>
+                <form id="search-form" class="form">
                     <div class="search wide search-button alt-ring event-search">
-                        <input value="hey" />
+                        <input name="query" value="hey" />
                         <button type="submit" class="ui-button">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                     <div class="form-groups options">
                         <div class="form-group">
-                            <label>Date</label>
-                            <select class="time-list"></select>
+                            <label>From Date</label>
+                            <input name="fromDate" type="date" value="<?php echo $date ?>" min="<?php echo $date ?>" name="startDate" />
                         </div>
                         <div class="form-group">
-                            <label>Time</label>
-                            <select class="time-list"></select>
+                            <label>From Time</label>
+                            <select name="fromTime">
+                                <option>All</option>
+                                <option> 00:00 </option>
+                                <option>00:30 </option>
+                                <option> 01:00 </option>
+                                <option>01:30 </option>
+                                <option> 02:00 </option>
+                                <option>02:30 </option>
+                                <option> 03:00 </option>
+                                <option>03:30 </option>
+                                <option> 04:00 </option>
+                                <option>04:30 </option>
+                                <option> 05:00 </option>
+                                <option>05:30 </option>
+                                <option> 06:00 </option>
+                                <option>06:30 </option>
+                                <option> 07:00 </option>
+                                <option>07:30 </option>
+                                <option> 08:00 </option>
+                                <option>08:30 </option>
+                                <option> 09:00 </option>
+                                <option>09:30 </option>
+                                <option> 10:00 </option>
+                                <option>10:30 </option>
+                                <option> 11:00 </option>
+                                <option>11:30 </option>
+                                <option> 12:00 </option>
+                                <option>12:30 </option>
+                                <option> 13:00 </option>
+                                <option>13:30 </option>
+                                <option> 14:00 </option>
+                                <option>14:30 </option>
+                                <option> 15:00 </option>
+                                <option>15:30 </option>
+                                <option> 16:00 </option>
+                                <option>16:30 </option>
+                                <option> 17:00 </option>
+                                <option>17:30 </option>
+                                <option> 18:00 </option>
+                                <option>18:30 </option>
+                                <option> 19:00 </option>
+                                <option>19:30 </option>
+                                <option> 20:00 </option>
+                                <option>20:30 </option>
+                                <option> 21:00 </option>
+                                <option>21:30 </option>
+                                <option> 22:00 </option>
+                                <option>22:30 </option>
+                                <option> 23:00 </option>
+                                <option>23:30 </option>
+                            </select>
                         </div>
-                        <div class="inline form-group">
+                        <!-- <div class="inline form-group">
                             <label class="radio">
                                 <input type="checkbox" name="venue" />
                                 <div class="content">
@@ -50,163 +103,46 @@
                                     Online Only
                                 </div>
                             </label>
-                        </div>
+                        </div> -->
 
+                    </div>
+                    <div class="form-groups options">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select name="category">
+                                <option>All</option>
+                                <?php
+                                foreach ($eventCategories as $category) {
+                                    echo "<option value={$category->id}>{$category->name}</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select name="type">
+                                <option>All</option>
+                                <?php
+                                foreach ($eventTypes as $eventType) {
+                                    echo "<option value={$eventType->id}>{$eventType->name}</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                 </form>
             </section>
 
             <section class="results-container">
-                <ul class="results">
-                    <li>
-                        <div class="preview-card">
-                            <div>
-                                <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                            </div>
-                            <div class="content">
-                                <h2 class="title">Event Name</h2>
-                                <ul class="extra-details">
-                                    <li>
-                                        <i class="far fa-clock"></i>
-                                        6:00PM - 7:00PM
-                                    </li>
-                                    <li>
-                                        <i class="far fa-calendar-alt"></i>
-                                        26th August 2020
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-map-marked-alt"></i>
-                                        Airport Residential, Accra, Ghana.
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="preview-card">
-                            <div>
-                                <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                            </div>
-                            <div class="content">
-                                <h2 class="title">Event Name</h2>
-                                <ul class="extra-details">
-                                    <li>
-                                        <i class="far fa-clock"></i>
-                                        6:00PM - 7:00PM
-                                    </li>
-                                    <li>
-                                        <i class="far fa-calendar-alt"></i>
-                                        26th August 2020
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-map-marked-alt"></i>
-                                        Airport Residential, Accra, Ghana.
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="preview-card">
-                            <div>
-                                <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                            </div>
-                            <div class="content">
-                                <h2 class="title">Event Name</h2>
-                                <ul class="extra-details">
-                                    <li>
-                                        <i class="far fa-clock"></i>
-                                        6:00PM - 7:00PM
-                                    </li>
-                                    <li>
-                                        <i class="far fa-calendar-alt"></i>
-                                        26th August 2020
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-map-marked-alt"></i>
-                                        Airport Residential, Accra, Ghana.
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="preview-card">
-                            <div>
-                                <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                            </div>
-                            <div class="content">
-                                <h2 class="title">Event Name</h2>
-                                <ul class="extra-details">
-                                    <li>
-                                        <i class="far fa-clock"></i>
-                                        6:00PM - 7:00PM
-                                    </li>
-                                    <li>
-                                        <i class="far fa-calendar-alt"></i>
-                                        26th August 2020
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-map-marked-alt"></i>
-                                        Airport Residential, Accra, Ghana.
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="preview-card">
-                            <div>
-                                <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                            </div>
-                            <div class="content">
-                                <h2 class="title">Event Name</h2>
-                                <ul class="extra-details">
-                                    <li>
-                                        <i class="far fa-clock"></i>
-                                        6:00PM - 7:00PM
-                                    </li>
-                                    <li>
-                                        <i class="far fa-calendar-alt"></i>
-                                        26th August 2020
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-map-marked-alt"></i>
-                                        Airport Residential, Accra, Ghana.
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="preview-card">
-                            <div>
-                                <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                            </div>
-                            <div class="content">
-                                <h2 class="title">Event Name</h2>
-                                <ul class="extra-details">
-                                    <li>
-                                        <i class="far fa-clock"></i>
-                                        6:00PM - 7:00PM
-                                    </li>
-                                    <li>
-                                        <i class="far fa-calendar-alt"></i>
-                                        26th August 2020
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-map-marked-alt"></i>
-                                        Airport Residential, Accra, Ghana.
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <i id="spinner" class="fas fa-spinner loading-spinner hidden"></i>
+                <ul id="event-results" class="results"></ul>
             </section>
         </main>
     </div>
 </body>
 <script src="/assets/js/common.js"></script>
+<script src="/assets/js/dayjs-advanced.min.js"></script>
+<script src="/assets/js/dayjs.min.js"></script>
+<script src="/assets/js/search.js"></script>
 
 </html>

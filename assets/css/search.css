@@ -39,12 +39,45 @@
 .results-container {
   margin-top: 90px;
   width: 100%;
+  height: max-content;
 }
 
 .results {
   width: 100%;
+  margin-bottom: 30px;
+  height: max-content;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px 0px;
   flex-wrap: wrap;
+}
+
+.results li {
+  height: max-content;
+}
+
+.loading-spinner {
+  animation-name: Spin;
+  animation-duration: 0.9s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  text-align: center;
+  display: block;
+  font-size: 50px;
+  color: var(--illuminating-emerald);
+}
+
+.loading-spinner.hidden {
+  display: none;
+}
+
+@keyframes Spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
