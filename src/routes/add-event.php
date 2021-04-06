@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $eventTypeDAO->findById(intval($checker->getFieldData("eventType"))),
             $eventCategoryDAO->findById(intval($checker->getFieldData("eventCategory"))),
             $checker->getFieldData('imageLink'),
-            $checker->getFieldData('venue') == 'remote' ? true : false,
+            $checker->getFieldData('venue') == 'remote',
         );
 
         if ($event->isOnline) {
@@ -118,6 +118,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $event->latitude = $checker->getFieldData('lat');
             $event->longitude = $checker->getFieldData('long');
         }
+        // var_dump($event);
+        // die();
 
         $eventDAO->save($event);
     }
