@@ -14,9 +14,9 @@ function buildOrganizerOptions()
 
 function buildPersonOptions()
 {
-    $name = getSession()->user->firstName . " " . getSession()->lastName;
+    $name = getSession()->user->firstName . " " . getSession()->user->lastName;
     return "<ul class='menu'>
-                <li><a>{$name}</a></li>
+                <li class='fixed'><a>{$name}</a></li>
                 <li><a href=''>Account</a></li>
                 <li><a href=''>Logout</a></li>
             </ul>";
@@ -42,6 +42,7 @@ function buildPersonOptions()
     <div>
         <?php
         $options = getSession() !== false ?  (getSession()->user instanceof Organizer  ?  buildOrganizerOptions() : buildPersonOptions()) : "";
+
         if (getSession() === false) {
             echo "<div class='button-group'>
             <a title='Login as user or organizer' href='/signin.php'>Login</a>
