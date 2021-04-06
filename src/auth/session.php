@@ -26,6 +26,8 @@ class Session
     }
 }
 
+
+
 /**
  * Gets the current user session or false if a session doesn't exist.
  * 
@@ -75,7 +77,7 @@ function setSession($user)
  */
 function endSession()
 {
-    if (!isset($_SESSION["user"])) {
+    if (isset($_SESSION["user"])) {
         unset($_SESSION["user"]);
         unset($_SESSION["isOrganizer"]);
         return true;
