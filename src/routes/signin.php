@@ -52,6 +52,7 @@ $checker = FieldTester::withArgs($_POST, array(
                     $entity = $personDAO->findById($user->email);
                 }
 
+                endSession();
                 setSession($entity);
                 return true;
             })
