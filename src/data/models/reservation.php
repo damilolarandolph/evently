@@ -13,6 +13,7 @@ class Reservation extends Model
     public function __construct()
     {
         parent::__construct("reservation");
+        $this->reservedAt = time();
     }
 
     public function __set($name, $value)
