@@ -39,7 +39,7 @@ class EventDAO extends DAO
      * 
      * @param int $id
      * 
-     * @return Event
+     * @return Event|false
      */
 
     public function findById($id)
@@ -48,8 +48,12 @@ class EventDAO extends DAO
         $q = "SELECT * FROM {$this->table} WHERE id=?";
         $stmt = $this->conn->prepare($q);;
         $stmt->execute(array($id));
+        if ($stmt->rowCount() == 0) {
+            return false;
+        }
         $stmt->setFetchMode(PDO::FETCH_CLASS, "Event");
         $res = $stmt->fetch();
+        $this->hydrateEvent($res);
         return $res;
     }
 
@@ -62,6 +66,7 @@ class EventDAO extends DAO
     {
         $q = "SELECT * FROM {$this->table}";
         $res = $this->conn->query($q)->fetchAll(PDO::FETCH_CLASS, "Event");
+        $this->hydrateEvents($res);
         return $res;
     }
 
@@ -141,7 +146,7 @@ class EventDAO extends DAO
      */
     private function hydrateEvents(&$events)
     {
-        foreach ($events as &$event) {
+        foreach ($events as $event) {
             $this->hydrateEvent($event);
         }
     }

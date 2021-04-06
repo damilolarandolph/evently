@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+require_once __DIR__ . "/src/routes/event.php";
+?>
 <html lang="en">
 
 <head>
@@ -22,68 +25,109 @@
     <section class="main-section">
         <div class="first-div">
             <div class="preview-image">
-                <img src="/assets/images/placeholder_avatar.jpg" />
+                <img src="<?php echo $event->image; ?>" />
             </div>
             <aside>
-                <h2 class="event-title">Event Title</h2>
+                <h2 class="event-title"><?php echo $event->name; ?></h2>
                 <ul class="badges event-badges">
                     <li class="badge">
-                        <i class="fas fa-check"></i>
-                        <span>Attending</span>
+                        <i class="fas fa-project-diagram"></i>
+                        <span><?php echo $event->type->name ?></span>
                     </li>
                     <li class="badge">
-                        <i class="fas fa-check"></i>
-                        <span>Hello</span>
+                        <i class="fas fa-project-diagram"></i>
+                        <span><?php echo $event->category->name ?></span>
                     </li>
+
                 </ul>
                 <p class="event-details">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab illo
-                    eius vero nostrum repudiandae amet, optio sapiente illum
-                    necessitatibus inventore distinctio perferendis at tempora expedita
-                    magnam id ex doloremque et.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab illo
-                    eius vero nostrum repudiandae amet, optio sapiente illum
-                    necessitatibus inventore distinctio perferendis at tempora expedita
-                    magnam id ex doloremque et.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab illo
-                    eius vero nostrum repudiandae amet, optio sapiente illum
-                    necessitatibus inventore distinctio perferendis at tempora expedita
-                    magnam id ex doloremque et.
+                    <?php echo $event->description; ?>
                 </p>
-                <button class="ui-button attend-button">
-                    <i class="fas fa-ticket-alt"></i> Attend</button>
+                <?php
+                if (getSession() === false) {
+                    echo " <a href='/signin.php' class='ui-button attend-button'>
+                    <i class='fas fa-ticket-alt'></i> Login to attend</a>";
+                } else if (getSession()->user instanceof Organizer) {
+                    echo " <a class='ui-button attend-button'>
+                    <i class='fas fa-ticket-alt'></i>Something </a>";
+                } else if (getSession()->user instanceof Person) {
+
+                    $attendaceText = $reservation !== false ? "Attending" : "Attend";
+
+                    echo "<form method='POST'><button type='submit'class='ui-button attend-button'>
+                    <i class='fas fa-ticket-alt'></i> {$attendaceText}</button></form>";
+                }
+
+                ?>
             </aside>
         </div>
     </section>
+    <?php
+
+    if (!$event->isOnline)
+        $encodedUrl = urlencode($event->location);
+    echo "
+    <section class='map-section'>
+        <iframe  loading='lazy' allowfullscreen
+         src='https://www.google.com/maps/embed/v1/place?key=$googleKey&q=$encodedUrl'>
+        </iframe>
+    </section>
+    ";
+    ?>
     <section class="other-info-section">
         <ul class="info-cards">
+            <?php
+            if (!$event->isOnline) {
+                echo "
+            <li class='card mini'>
+                <span class='title'>Location</span>
+                <div class='body'>{$event->location}</div>
+            </li>";
+            }
+            ?>
+            <?php
+
+            $speakers = explode(",", $event->speaker);
+            if (count($speakers) != 0 && $event->speaker !== "") {
+                $speakersHTML = "";
+                foreach ($speakers as $speaker) {
+                    $speakersHTML .= "<li>$speaker</li>";
+                }
+                echo " <li class='card mini'>
+                <span class='title'>
+<ul>
+$speakersHTML
+</ul>
+                </span>
+                <div class='body'></div>
+            </li>";
+            }
+            ?>
             <li class="card mini">
-                <span class="title">Location</span>
+                <span class="title">
+                    Starts At
+                </span>
                 <div class="body">
-                    Some cool body
+                    <?php
+                    $startDate = date("jS F Y - g:iA", $event->startTime);
+                    echo $startDate;
+                    ?>
                 </div>
             </li>
             <li class="card mini">
                 <span class="title">
-                    Speaker
+                    Ends At
                 </span>
-                <div class="body">some cool body</div>
+                <div class="body">
+                    <?php
+                    $endDate = date("jS F Y - g:iA", $event->endTime);
+                    echo $endDate;
+                    ?>
+                </div>
             </li>
             <li class="card mini">
                 <span class="title">
-                    Speaker
-                </span>
-                <div class="body">some cool body</div>
-            </li>
-            <li class="card mini">
-                <span class="title">
-                    Speaker
-                </span>
-                <div class="body">some cool body</div>
-            </li>
-            <li class="card mini">
-                <span class="title">
-                    Speaker
+                    Tickets Left
                 </span>
                 <div class="body">some cool body</div>
             </li>

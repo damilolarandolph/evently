@@ -18,8 +18,8 @@ function genEventPreviewCard($event)
     $endTime = date("g:iA", $event->endTime);
     $startTime = date("g:iA", $event->startTime);
     $endDate = $startDate === $endDate ? "" : " - " . $endDate;
-    $location = $event->isOnline ? $event->location : "Remote";
-    return "<div class='preview-card'>
+    $location = $event->isOnline ? "Remote" : $event->location;
+    return "<a href='/event.php?event={$event->id}' class='preview-card'>
                 <div>
                     <img class='image' src='{$event->image}' />
                 </div>
@@ -40,5 +40,5 @@ function genEventPreviewCard($event)
                         </li>
                     </ul>
                 </div>
-            </div>";
+            </a>";
 }

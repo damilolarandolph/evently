@@ -39,10 +39,10 @@ function hideSpinner() {
 }
 
 
-function genCard(image, name, fromTime, toTime, fromDate, toDate, location) {
+function genCard(id, image, name, fromTime, toTime, fromDate, toDate, location) {
 
     return `<li>
-                        <div class="preview-card">
+                        <a href="/event.php?event=${id}" class="preview-card">
                             <div>
                                 <img class="image" src="${image}" />
                             </div>
@@ -64,7 +64,7 @@ function genCard(image, name, fromTime, toTime, fromDate, toDate, location) {
                                 </ul>
                             </div>
                         </div>
-                    </li>`
+                    </a>`
 }
 
 
@@ -81,7 +81,7 @@ function renderResults(data) {
         let endDate = to.format("Do MMMM YYYY");
         let fromTime = from.format("hh:mm a");
         let toTime = to.format("hh:mm a");
-        return genCard(item.image, item.name, fromTime, toTime, fromDate, endDate, "remote")
+        return genCard(item.id, item.image, item.name, fromTime, toTime, fromDate, endDate, "remote")
     }).join("");
 
 }
