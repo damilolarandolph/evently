@@ -14,7 +14,7 @@
                 tabs[index].style.display = 'none'
                 radios[index].checked = false;
             } else {
-                hasSelected = false;
+                hasSelected = true;
             }
             radios[index].addEventListener("change", function (event) {
                 for (let tab of tabsContainer.children) {
