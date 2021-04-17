@@ -27,37 +27,9 @@ require_once __DIR__ . "/src/routes/home.php";
             <h3>Explore !</h3>
             <p>Our wide selection of events</p>
         </div>
-        <div class="upcoming-event">
-            <main class="content">
-                <h4 class="title">Event Title</h4>
-                <img class="event-image" src="/assets/images/placeholder_avatar.jpg" />
-                <ul class="extra-details">
-                    <li>
-                        <i class="far fa-clock"></i>
-                        6:00PM - 7:00PM
-                    </li>
-                    <li>
-                        <i class="far fa-calendar-alt"></i>
-                        26th August 2020
-                    </li>
-                    <li>
-                        <i class="fas fa-map-marked-alt"></i>
-                        Airport Residential, Accra, Ghana.
-                    </li>
-                </ul>
-            </main>
-            <div class="kitchen-sink">
-                <div class="item">
-                    <p>Reservations Left</p>
-                    <h5>80</h5>
-                </div>
-                <div class="item">
-                    <p>Event registeration ends in</p>
-                    <h5 class="countdown" endTime="unixtimestamp">16:00:90</h5>
-                </div>
-
-            </div>
-        </div>
+        <?php
+        echo genEventCountdownCard($eventOfTheDay);
+        ?>
     </section>
     <section class="home-section">
         <h4 class="title">Closing Soon⏱️</h4>
@@ -346,5 +318,7 @@ require_once __DIR__ . "/src/routes/home.php";
         </div>
     </section>
 </body>
+<script src="/assets/js/dayjs.min.js"></script>
+<script src="/assets/js/common.js"></script>
 
 </html>
