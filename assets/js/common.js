@@ -14,6 +14,7 @@
                 tabs[index].style.display = 'none'
                 radios[index].checked = false;
             } else {
+                radios[index].checked = true;
                 hasSelected = true;
             }
             radios[index].addEventListener("change", function (event) {

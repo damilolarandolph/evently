@@ -51,9 +51,12 @@ require_once __DIR__ . "/src/routes/event.php";
                     <i class='fas fa-ticket-alt'></i> Login to attend</a>";
                 } else if ($event->getTicketsLeft() != "Unlimited" && $event->getTicketsLeft() == 0) {
                     echo "";
-                } else if (getSession()->user instanceof Organizer) {
-                    echo " <a class='ui-button attend-button'>
-                    <i class='fas fa-ticket-alt'></i>Something </a>";
+                } else if (
+                    getSession()->user instanceof Organizer &&
+                    (getSession()->user->user->email == $event->getOrganizer()->user->email)
+                ) {
+                    echo " <a href='/edit-event.php?event={$event->id}' class='ui-button attend-button'>
+                    <i class='fas fa-pen'></i>   Edit</a>";
                 } else if (getSession()->user instanceof Person) {
 
                     $attendaceText = $reservation !== false ? "Attending" : "Attend";

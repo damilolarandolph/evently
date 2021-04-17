@@ -115,34 +115,42 @@ class EventDAO extends DAO
      */
     public function update($model)
     {
-        return $this->save($model);
+
+        $q = "UPDATE {$this->table} SET 
+         name = ?,
+         tickets = ?,
+         image = ?,
+         start_time = ?,
+         end_time = ?,
+         speaker = ?,
+         is_online = ?,
+         meeting_link = ?,
+         description = ?,
+         location = ?,
+         type = ?,
+         category = ? 
+         WHERE id = ?
+         ";
+        $stmt = $this->conn->prepare($q);
+        $stmt->execute(array(
+            $model->name,
+            $model->tickets,
+            $model->image,
+            $model->startTime,
+            $model->endTime,
+            $model->speaker,
+            (int)$model->isOnline,
+            $model->meetingLink,
+            $model->description,
+            $model->location,
+            $model->getType()->id,
+            $model->getCategory()->id,
+            $model->id
+        ));
     }
 
 
-    // /**
-    //  * 
-    //  * Hydrates type, category and organizer fields of an event.
-    //  * 
-    //  * @param Event $event
-    //  */
-    // private function hydrateEvent(&$event)
-    // {
-    //     $event->type = $this->eventTypeDAO->findById($event->type);
-    //     $event->category = $this->eventCategoryDAO->findById($event->category);
-    //     $event->organizer = $this->organizerDAO->findById($event->organizer);
-    // }
 
-    // /**
-    //  * Hyrdrates an array of events.
-    //  * 
-    //  * @param Event[]
-    //  */
-    // private function hydrateEvents(&$events)
-    // {
-    //     foreach ($events as $event) {
-    //         $this->hydrateEvent($event);
-    //     }
-    // }
 
     /**
      * Gets open events that will be closing soon.

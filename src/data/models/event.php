@@ -23,9 +23,9 @@ class Event extends Model implements JsonSerializable
     public $location;
     public $reservations;
     private $type;
-
-
     private $category;
+
+
     private $organizerDAO;
     private $typeDAO;
     private $categoryDAO;
@@ -124,7 +124,7 @@ class Event extends Model implements JsonSerializable
 
     public function getOrganizer()
     {
-        if (is_numeric($this->organizer)) {
+        if (is_string($this->organizer)) {
             $this->organizer = $this->organizerDAO->findById($this->organizer);
         }
 
@@ -157,5 +157,20 @@ class Event extends Model implements JsonSerializable
             $this->reservations = $this->reservationDAO->findAllForEvent($this);
         }
         return $this->reservations;
+    }
+
+    public function setType($val)
+    {
+        $this->type = $val;
+    }
+
+    public function setCategory($val)
+    {
+        $this->category = $val;
+    }
+
+    public function setOrganizer($val)
+    {
+        $this->organizer = $val;
     }
 }
