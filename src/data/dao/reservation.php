@@ -61,7 +61,6 @@ class ReservationDAO extends DAO
 
         foreach ($reservations as $reservation) {
             $reservation->event = $event;
-            $reservation->person = $this->personDAO->findById($reservation->person);
         }
 
         return $reservations;
@@ -96,7 +95,7 @@ class ReservationDAO extends DAO
         $q = "INSERT INTO {$this->table} (person, event, reserved_at) " .
             "VALUES(?,?,?)";
         $stmt = $this->conn->prepare($q);
-        $stmt->execute(array($model->person->user->email, $model->event->id, $model->reservedAt));
+        $stmt->execute(array($model->getPerson()->user->email, $model->getEvent()->id, $model->reservedAt));
     }
 
     /**
@@ -108,7 +107,7 @@ class ReservationDAO extends DAO
     {
         $q = "DELETE FROM {$this->table} WHERE event=? AND person=?";
         $stmt = $this->conn->prepare($q);
-        $stmt->execute(array($model->event->id, $model->person->user->email));
+        $stmt->execute(array($model->getEvent()->id, $model->getPerson()->user->email));
         return $stmt->rowCount() > 0;
     }
 
@@ -138,17 +137,18 @@ class ReservationDAO extends DAO
         return $stmt->fetchColumn();
     }
 
-    public function getReservationsForEvent($event)
-    {
-        $q = "SELECT * FROM {$this->table} WHERE event=?";
-        $stmt = $this->conn->prepare($q);
-        $stmt->execute($event->id);
-        $reservations = $stmt->fetchAll(PDO::FETCH_CLASS, "Reservation");
-        foreach ($reservations as $reservation) {
-            $reservation->event = $event;
-        }
-        return $reservations;
-    }
+
+    // public function getReservationsForEvent($event)
+    // {
+    //     $q = "SELECT * FROM {$this->table} WHERE event=?";
+    //     $stmt = $this->conn->prepare($q);
+    //     $stmt->execute(array($event->id));
+    //     $reservations = $stmt->fetchAll(PDO::FETCH_CLASS, "Reservation");
+    //     foreach ($reservations as $reservation) {
+    //         $reservation->event = $event;
+    //     }
+    //     return $reservations;
+    // }
 
     /**
      * Checks if a reservation for an event exists in the database.

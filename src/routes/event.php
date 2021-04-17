@@ -20,6 +20,7 @@ $reservationDAO->init();
 
 $eventID = $_GET["event"];
 $event = $eventDAO->findById(intval($eventID));
+$eventReservations = $reservationDAO->findAllForEvent($event);
 
 if ($session = getSession()) {
     if ($session->user instanceof Organizer) {
@@ -27,6 +28,8 @@ if ($session = getSession()) {
         $reservation = $reservationDAO->getReservation($event, $session->user);
     }
 }
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 

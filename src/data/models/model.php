@@ -14,3 +14,8 @@ abstract class Model
         return $this->table;
     }
 }
+
+function getPublicVars($model)
+{
+    return get_object_vars($model);
+}

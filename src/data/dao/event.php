@@ -22,17 +22,11 @@ class EventDAO extends DAO
     public function __construct($pdoConn)
     {
         parent::__construct($pdoConn, "event");
+        $this->eventTypeDAO = new EventTypeDAO(PDOConn::instance());
+        $this->eventCategoryDAO = new EventCategoryDAO(PDOConn::instance());
     }
 
-    public function init()
-    {
-        $this->eventCategoryDAO = new EventCategoryDAO(PDOConn::instance());
-        $this->eventCategoryDAO->init();
-        $this->eventTypeDAO = new EventTypeDAO(PDOConn::instance());
-        $this->eventTypeDAO->init();
-        $this->organizerDAO = new OrganizerDAO(PDOConn::instance());
-        $this->organizerDAO->init();
-    }
+
 
     /**
      * {@inheritDoc}
@@ -53,7 +47,6 @@ class EventDAO extends DAO
         }
         $stmt->setFetchMode(PDO::FETCH_CLASS, "Event");
         $res = $stmt->fetch();
-        $this->hydrateEvent($res);
         return $res;
     }
 
@@ -66,7 +59,6 @@ class EventDAO extends DAO
     {
         $q = "SELECT * FROM {$this->table}";
         $res = $this->conn->query($q)->fetchAll(PDO::FETCH_CLASS, "Event");
-        $this->hydrateEvents($res);
         return $res;
     }
 
@@ -107,12 +99,12 @@ class EventDAO extends DAO
             (int) $model->isOnline,
             $model->meetingLink,
             $model->description,
-            $model->organizer->user->email,
+            $model->getOrganizer()->user->email,
             $model->longitude,
             $model->latitude,
             $model->location,
-            $model->type->id,
-            $model->category->id
+            $model->getType()->id,
+            $model->getCategory()->id
         ));
     }
 
@@ -126,30 +118,31 @@ class EventDAO extends DAO
         return $this->save($model);
     }
 
-    /**
-     * 
-     * Hydrates type, category and organizer fields of an event.
-     * 
-     * @param Event $event
-     */
-    private function hydrateEvent(&$event)
-    {
-        $event->type = $this->eventTypeDAO->findById($event->type);
-        $event->category = $this->eventCategoryDAO->findById($event->category);
-        $event->organizer = $this->organizerDAO->findById($event->organizer);
-    }
 
-    /**
-     * Hyrdrates an array of events.
-     * 
-     * @param Event[]
-     */
-    private function hydrateEvents(&$events)
-    {
-        foreach ($events as $event) {
-            $this->hydrateEvent($event);
-        }
-    }
+    // /**
+    //  * 
+    //  * Hydrates type, category and organizer fields of an event.
+    //  * 
+    //  * @param Event $event
+    //  */
+    // private function hydrateEvent(&$event)
+    // {
+    //     $event->type = $this->eventTypeDAO->findById($event->type);
+    //     $event->category = $this->eventCategoryDAO->findById($event->category);
+    //     $event->organizer = $this->organizerDAO->findById($event->organizer);
+    // }
+
+    // /**
+    //  * Hyrdrates an array of events.
+    //  * 
+    //  * @param Event[]
+    //  */
+    // private function hydrateEvents(&$events)
+    // {
+    //     foreach ($events as $event) {
+    //         $this->hydrateEvent($event);
+    //     }
+    // }
 
     /**
      * Gets open events that will be closing soon.
@@ -170,7 +163,6 @@ class EventDAO extends DAO
         $stmt = $this->conn->prepare($q);
         $stmt->execute(array($timeStamp, $amount));
         $res = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
-        $this->hydrateEvents($res);
         return $res;
     }
 
@@ -214,12 +206,37 @@ class EventDAO extends DAO
                 $paramsArr['eventCategory'] = $cat->id;
             }
         }
-
-
         $stmt = $this->conn->prepare($q);
         $stmt->execute($paramsArr);
         $res = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
-        $this->hydrateEvents($res);
         return $res;
+    }
+
+    public function getEventOfDay()
+    {
+
+        $time = time();
+        $q = "SELECT * FROM {$this->table} WHERE start_time > ? ORDER BY start_time DESC";
+        $stmt = $this->conn->prepare($q);
+        $stmt->execute(array($time));
+        $res = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
+
+        foreach ($res as $event) {
+            if ($event->getTicketsLeft() === 0) {
+                continue;
+            }
+            return $event;
+        }
+
+        return NULL;
+    }
+
+    public function getForOrganizer($org)
+    {
+        $q = "SELECT * FROM {$this->table} WHERE organizer=?";
+        $stmt = $this->conn->prepare($q);
+        $stmt->execute(array($org->user->email));
+        $results = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
+        return $results;
     }
 }
