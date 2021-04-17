@@ -79,3 +79,36 @@
     }
 
 })();
+
+
+(function () {
+    const countdowns = document.querySelectorAll(".countdown");
+    /**
+     * 
+     * @param {Element} elem 
+     * @param {Number} timestamp 
+     */
+    let genCountDown = function (timestamp) {
+        let _second = 1;
+        let _minute = _second * 60;
+        let _hour = _minute * 60;
+        let _day = _hour * 24;
+        let _now = Date.now() / 1000;
+        let distance = timestamp - _now;
+        let days = Math.floor(distance / _day);
+        let hours = Math.floor((distance % _day) / _hour);
+        let minutes = Math.floor((distance % _hour) / _minute);
+        let seconds = Math.floor((distance % _minute) / _second);
+
+        return `${days + "d"} ${hours + "h"} ${minutes + "m"} ${seconds + "s"}`
+    }
+    let countDownWrapper = function (elem, timestamp) {
+        elem.innerHTML = genCountDown(timestamp);
+    }
+    for (let countdown of countdowns) {
+        countDownWrapper(countdown, countdown.getAttribute("endTime"))
+        setInterval(() => {
+            countDownWrapper(countdown, countdown.getAttribute("endTime"))
+        }, 1000);
+    }
+})();
