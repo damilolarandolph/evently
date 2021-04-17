@@ -8,3 +8,4 @@ require_once __DIR__ . "/../utils/templates.php";
 $eventRepo = new EventDAO(PDOConn::instance());
 $eventRepo->init();
 $eventsClosingSoon = $eventRepo->getClosingSoon();
+$eventOfTheDay = $eventRepo->getEventOfDay();
