@@ -6,10 +6,9 @@ function buildOrganizerOptions()
     $name = getSession()->user->name;
     return "<ul class='menu'>
                 <li class='fixed'><a>{$name}</a></li>
-                <li><a href=''>Account</a></li>
+                <li><a href='/dashboard.php'>Account</a></li>
                 <li><a href='/add-event.php'>Create Event</a></li>
-                <li><a href=''>Logout</a></li>
-            </ul>";
+            </ul> ";
 }
 
 function buildPersonOptions()
@@ -17,9 +16,10 @@ function buildPersonOptions()
     $name = getSession()->user->firstName . " " . getSession()->user->lastName;
     return "<ul class='menu'>
                 <li class='fixed'><a>{$name}</a></li>
-                <li><a href=''>Account</a></li>
-                <li><a href=''>Logout</a></li>
-            </ul>";
+                <li><a href='/dashboard.php'>Account</a></li>
+            </ul> 
+                
+                ";
 }
 
 ?>
@@ -53,7 +53,9 @@ function buildPersonOptions()
             echo "<button class='avatar focus-popover-menu'>
             <img class='avatar-img' src='/assets/images/placeholder_avatar.jpg'>
             {$options}
-        </button>";
+        </button><form class='logout-form' method='POST' action='/logout.php'>
+                <button class='ui-button mini' type='submit'>Logout</button>
+                </form> ";
         }
         ?>
     </div>
