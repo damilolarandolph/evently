@@ -52,6 +52,14 @@ a {
   transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
+.logout-form {
+  display: inline;
+}
+
+.ui-button.mini {
+  padding: 10px 20px;
+}
+
 .badge {
   background-color: var(--granny-smith-apple);
   width: max-content;
@@ -71,7 +79,9 @@ a {
 }
 
 .badges li {
-  margin: 0 10px;
+  margin-right: 10px;
+  font-size: 10px;
+  font-weight: bold;
 }
 
 .badge span {
@@ -143,6 +153,7 @@ nav h2 {
 
 .focus-popover-menu {
   position: relative;
+  vertical-align: middle;
 }
 
 .avatar.focus-popover-menu {
@@ -222,8 +233,8 @@ button {
 .card.mini {
   min-width: 250px;
   overflow: hidden;
-  min-height: 200px;
-  height: 100%;
+  min-height: 100px;
+  max-height: 100%;
 }
 
 .card.mini .title {
@@ -238,8 +249,9 @@ button {
 }
 
 .card.mini .body {
-  margin-top: 20px;
-  font-style: oblique;
+  margin-top: 10px;
+  padding: 10px;
+  height: 100%;
   text-align: center;
 }
 

@@ -23,7 +23,7 @@ require_once __DIR__ . "/src/routes/event.php";
     ?>
 
     <section class="main-section">
-        <div class="first-div">
+        <div class="first-div" style="background-image: url(<?php echo $event->image; ?>);">
             <div class="preview-image">
                 <img src="<?php echo $event->image; ?>" />
             </div>
@@ -32,11 +32,11 @@ require_once __DIR__ . "/src/routes/event.php";
                 <ul class="badges event-badges">
                     <li class="badge">
                         <i class="fas fa-project-diagram"></i>
-                        <span><?php echo $event->type->name ?></span>
+                        <span><?php echo $event->getType()->name ?></span>
                     </li>
                     <li class="badge">
                         <i class="fas fa-project-diagram"></i>
-                        <span><?php echo $event->category->name ?></span>
+                        <span><?php echo $event->getCategory()->name ?></span>
                     </li>
 
                 </ul>
@@ -44,9 +44,13 @@ require_once __DIR__ . "/src/routes/event.php";
                     <?php echo $event->description; ?>
                 </p>
                 <?php
-                if (getSession() === false) {
-                    echo " <a href='/signin.php' class='ui-button attend-button'>
+                if (time() >= $event->startTime) {
+                    echo "";
+                } else if (getSession() === false) {
+                    echo "<a href='/signin.php' class='ui-button attend-button'>
                     <i class='fas fa-ticket-alt'></i> Login to attend</a>";
+                } else if ($event->getTicketsLeft() != "Unlimited" && $event->getTicketsLeft() == 0) {
+                    echo "";
                 } else if (getSession()->user instanceof Organizer) {
                     echo " <a class='ui-button attend-button'>
                     <i class='fas fa-ticket-alt'></i>Something </a>";
@@ -95,11 +99,13 @@ require_once __DIR__ . "/src/routes/event.php";
                 }
                 echo " <li class='card mini'>
                 <span class='title'>
+Speakers
+                </span>
+                <div class='body'>
 <ul>
 $speakersHTML
 </ul>
-                </span>
-                <div class='body'></div>
+                </div>
             </li>";
             }
             ?>
@@ -129,7 +135,12 @@ $speakersHTML
                 <span class="title">
                     Tickets Left
                 </span>
-                <div class="body">some cool body</div>
+                <div class="body">
+
+                    <?php
+                    echo $event->getTicketsLeft();
+                    ?>
+                </div>
             </li>
         </ul>
     </section>
