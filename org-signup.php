@@ -17,6 +17,11 @@
 
 <body class="layout">
     <main class="auth-form">
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/images/logo.png" />
+            </a>
+        </div>
         <form class="form <?php $checker->getFoundErrors() ? print("has-errors") : ""; ?>" method="POST" action="">
             <div class="form-group">
                 <label>Organization Name</label>

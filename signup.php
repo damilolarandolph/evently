@@ -19,6 +19,11 @@ require_once __DIR__ . "/src/routes/signup.php";
 
 <body class="layout">
     <main class="auth-form">
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/images/logo.png" />
+            </a>
+        </div>
         <form class="form" method="POST">
             <div class="form-group <?php $checker->fieldHasError("firstName") ? print("has-errors") : print(""); ?>">
                 <label>First Name</label>

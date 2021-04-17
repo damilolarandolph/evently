@@ -19,6 +19,11 @@ require_once __DIR__ . "/src/routes/signin.php";
 
 <body class="layout">
     <main class="auth-form">
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/images/logo.png" />
+            </a>
+        </div>
         <form method="POST" class="form <?php $checker->getFoundErrors() ? print("has-errors") : ""; ?>">
             <div class="form-group">
                 <p class="error"><?php print($checker->getFieldError("auth-error")); ?></p>
