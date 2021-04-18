@@ -23,7 +23,7 @@
 .home-section {
   margin: 100px auto 50px auto;
   padding: 0px 70px;
-  width: max-content;
+  width: 90%;
 }
 
 .home-section .title {
@@ -61,6 +61,7 @@
 
   .home-section {
     padding: 0 4px;
+    width: max-content;
   }
   .home-section > .content {
     grid-template-columns: repeat(1, 1fr);

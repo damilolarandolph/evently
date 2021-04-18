@@ -477,6 +477,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 4px;
   height: 300px;
   width: 100%;
+  object-fit: cover;
 }
 
 .upcoming-event.mini .event-image {

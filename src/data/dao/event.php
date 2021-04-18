@@ -239,6 +239,53 @@ class EventDAO extends DAO
         return NULL;
     }
 
+    public function getNewlyAddedEvents()
+    {
+
+        $time = time();
+        $q = "SELECT * FROM {$this->table} WHERE start_time > ?  ORDER BY id DESC";
+        $stmt = $this->conn->prepare($q);
+        $stmt->execute(array($time));
+        $res = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
+        $accResult = array();
+
+        foreach ($res as $event) {
+            if ($event->getTicketsLeft() !== 0) {
+                array_push($accResult, $event);
+            }
+
+            if (count($accResult) == 4) {
+                break;
+            }
+        }
+
+        return $accResult;
+    }
+
+    public function getMoreEvents()
+    {
+        $time = time();
+        $q = "SELECT * FROM {$this->table} WHERE start_time > ?  ORDER BY id DESC";
+        $stmt = $this->conn->prepare($q);
+        $stmt->execute(array($time));
+        $res = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
+        $accResult = array();
+
+        for ($idx = 0; $idx < 12 && $idx < count($res);) {
+            if ($res[$idx]->getTicketsLeft() === 0) {
+                continue;
+            }
+            ++$idx;
+            if ($idx < 4) {
+                continue;
+            }
+
+            array_push($accResult, $res[$idx]);
+        }
+
+        return $accResult;
+    }
+
     public function getForOrganizer($org)
     {
         $q = "SELECT * FROM {$this->table} WHERE organizer=?";

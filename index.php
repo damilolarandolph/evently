@@ -31,292 +31,54 @@ require_once __DIR__ . "/src/routes/home.php";
         echo genEventCountdownCard($eventOfTheDay);
         ?>
     </section>
-    <section class="home-section">
-        <h4 class="title">Closing Soon⏱️</h4>
-        <div class="content">
-            <?php
-            foreach ($eventsClosingSoon as $event) {
-                echo genEventPreviewCard($event);
-            }
+    <?php
+    if (count($eventsClosingSoon) > 0) {
+        echo "<section class='home-section'>
+        <h4 class='title'>Closing Soon⏱️</h4>
+        <div class='content'>
+        ";
+        foreach ($eventsClosingSoon as $event) {
+            echo genEventPreviewCard($event);
+        }
 
-            ?>
-        </div>
-    </section>
-    <section class="home-section">
-        <h4 class="title">Newly Added🆕</h4>
-        <div class="content">
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="home-section">
-        <h4 class="title">More Events</h4>
-        <div class="content">
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        echo "</div></section>";
+    }
+    ?>
 
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="preview-card">
-                <div>
-                    <img class="image" src="/assets/images/placeholder_avatar.jpg" />
-                </div>
-                <div class="content">
-                    <h2 class="title">Event Name</h2>
-                    <ul class="extra-details">
-                        <li>
-                            <i class="far fa-clock"></i>
-                            6:00PM - 7:00PM
-                        </li>
-                        <li>
-                            <i class="far fa-calendar-alt"></i>
-                            26th August 2020
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marked-alt"></i>
-                            Airport Residential, Accra, Ghana.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php
+    $newlyAdded =  $eventRepo->getNewlyAddedEvents();
+
+    if (count($newlyAdded) > 0) {
+        echo "<section class='home-section'>
+        <h4 class='title'>Newly Added🆕</h4>
+        <div class='content'>
+        ";
+
+        foreach ($newlyAdded as $event) {
+            echo genEventPreviewCard($event);
+        }
+
+        echo "</div></section>";
+    }
+    ?>
+    <?php
+    $moreEvents =  $eventRepo->getMoreEvents();
+
+    if (count($moreEvents) > 0) {
+        echo "<section class='home-section'>
+        <h4 class='title'>Newly Added🆕</h4>
+        <div class='content'>
+        ";
+
+        foreach ($moreEvents as $event) {
+            echo genEventPreviewCard($event);
+        }
+
+        echo "</div></section>";
+    }
+    ?>
+
+
     <?php require_once __DIR__ . "/src/partials/footer.php" ?>
 </body>
 <script src="/assets/js/dayjs.min.js"></script>
