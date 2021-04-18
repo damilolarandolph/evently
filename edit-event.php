@@ -102,6 +102,7 @@
         </form>
     </section>
 
+    <?php require_once __DIR__ . "/src/partials/footer.php" ?>
 </body>
 <script src="/assets/js/common.js"></script>
 

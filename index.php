@@ -317,6 +317,7 @@ require_once __DIR__ . "/src/routes/home.php";
             </div>
         </div>
     </section>
+    <?php require_once __DIR__ . "/src/partials/footer.php" ?>
 </body>
 <script src="/assets/js/dayjs.min.js"></script>
 <script src="/assets/js/common.js"></script>

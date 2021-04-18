@@ -62,6 +62,8 @@ require_once __DIR__ . "/../utils/templates.php";
             </div>
         </main>
     </div>
+
+    <?php require_once __DIR__ . "/../partials/footer.php" ?>
 </body>
 <script src="/assets/js/common.js"></script>
 

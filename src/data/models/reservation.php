@@ -52,7 +52,7 @@ class Reservation extends Model implements JsonSerializable
 
     public function getPerson()
     {
-        if (is_numeric($this->person)) {
+        if (is_string($this->person)) {
             $this->person = $this->personDAO->findById($this->person);
         }
 

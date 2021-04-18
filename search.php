@@ -139,6 +139,8 @@ require_once __DIR__ . "/src/routes/search.php";
             </section>
         </main>
     </div>
+
+    <?php require_once __DIR__ . "/src/partials/footer.php" ?>
 </body>
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/dayjs-advanced.min.js"></script>
