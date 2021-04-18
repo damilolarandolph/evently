@@ -122,5 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // die();
 
         $eventDAO->save($event);
+        $lastId = PDOConn::instance()->lastInsertId();
+        header("Location: /event.php?event={$lastId}");
     }
 }
