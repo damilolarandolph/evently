@@ -11,6 +11,7 @@ require_once __DIR__ . "/src/routes/event.php";
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="./assets/css/all.min.css" />
     <link rel="stylesheet" href="./assets/css/common.css" />
     <link rel="stylesheet" href="./assets/css/view-event.css" />
@@ -44,6 +45,7 @@ require_once __DIR__ . "/src/routes/event.php";
                     <?php echo $event->description; ?>
                 </p>
                 <?php
+
                 if (time() >= $event->startTime) {
                     echo "";
                 } else if (getSession() === false) {
@@ -55,6 +57,7 @@ require_once __DIR__ . "/src/routes/event.php";
                     getSession()->user instanceof Organizer &&
                     (getSession()->user->user->email == $event->getOrganizer()->user->email)
                 ) {
+                    $isOrganizerOfEvent = true;
                     echo " <a href='/edit-event.php?event={$event->id}' class='ui-button attend-button'>
                     <i class='fas fa-pen'></i>   Edit</a>";
                 } else if (getSession()->user instanceof Person) {
@@ -69,18 +72,6 @@ require_once __DIR__ . "/src/routes/event.php";
             </aside>
         </div>
     </section>
-    <?php
-
-    if (!$event->isOnline)
-        $encodedUrl = urlencode($event->location);
-    echo "
-    <section class='map-section'>
-        <iframe  loading='lazy' allowfullscreen
-         src='https://www.google.com/maps/embed/v1/place?key=$googleKey&q=$encodedUrl'>
-        </iframe>
-    </section>
-    ";
-    ?>
     <section class="other-info-section">
         <ul class="info-cards">
             <?php
@@ -147,6 +138,63 @@ $speakersHTML
             </li>
         </ul>
     </section>
+    <?php
+
+    if (!$event->isOnline)
+        $encodedUrl = urlencode($event->location);
+    echo "
+    <section class='map-section'>
+        <iframe  loading='lazy' allowfullscreen
+         src='https://www.google.com/maps/embed/v1/place?key=$googleKey&q=$encodedUrl'>
+        </iframe>
+    </section>
+    ";
+    ?>
+
+    <section class="stats-sections">
+        <h3>Attendee Information</h3>
+        <table id="stats"></table>
+    </section>
+
+    <?php require_once __DIR__ . "/src/partials/footer.php" ?>
 </body>
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/jquery.dataTables.min.js"></script>
+<script>
+    let data = [
+        <?php
+        if ($isOrganizerOfEvent) {
+            foreach ($event->getReservations() as $reservation) {
+                $date = date("j/n/Y", $reservation->reservedAt);
+                $time = date("G:i", $reservation->reservedAt);
+                $person = $reservation->getPerson();
+                $name = $reservation->getPerson()->firstName . " " . $reservation->getPerson()->lastName;
+                echo "['{$name}', '{$person->user->email}', '{$person->user->phone}', '{$date}', '{$time}'],";
+            }
+        }
+        ?>
+    ];
+
+    $('#stats').DataTable({
+        data: data,
+        columns: [{
+                title: "Name"
+            },
+            {
+                title: "Email"
+            },
+            {
+                title: "Phone"
+            },
+            {
+                title: "Reservation Date"
+            },
+            {
+                title: "Reservation Time"
+            },
+
+        ]
+    });
+</script>
 
 </html>

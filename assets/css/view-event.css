@@ -51,7 +51,6 @@
 }
 
 .other-info-section {
-  margin: 40px 0;
   padding: 0 300px;
 }
 
@@ -94,4 +93,68 @@
 }
 .card.mini .body li {
   display: block;
+}
+
+.stats-sections {
+  width: 75%;
+  margin: 50px auto;
+}
+
+.stats-sections h3 {
+  margin-bottom: 10px;
+  margin-top: 30px;
+  font-size: 30px;
+  text-align: center;
+  color: var(--midnight-green-eagle-green);
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .stats-sections {
+    display: none;
+  }
+  .first-div {
+    flex-direction: column;
+    padding: 20px 4px;
+    align-items: center;
+  }
+
+  .main-section .first-div .preview-image {
+    width: 300px;
+    height: 300px;
+  }
+
+  .main-section aside {
+    margin: auto 0 auto 0;
+    padding: 0px 6px;
+    text-align: center;
+  }
+
+  .event-title {
+    font-size: 30px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .event-badges {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    row-gap: 7px;
+  }
+
+  .attend-button {
+    width: max-content;
+    margin: 30px auto;
+  }
+
+  .map-section {
+    height: 300px;
+  }
+
+  .other-info-section {
+    padding: 0 5px;
+  }
+  .other-info-section .info-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
