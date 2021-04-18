@@ -41,3 +41,28 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .hero {
+    flex-direction: column;
+    padding: 20px 20px;
+  }
+
+  .hero h3 {
+    font-size: 80px;
+    width: max-content;
+  }
+
+  .hero p {
+    width: max-content;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  .home-section {
+    padding: 0 4px;
+  }
+  .home-section > .content {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

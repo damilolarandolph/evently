@@ -614,3 +614,69 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ui-link.muted:after {
   background-color: var(--illuminating-emerald);
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .head-nav {
+    flex-direction: column;
+  }
+
+  .head-nav > * {
+    margin: 10px 0;
+  }
+
+  .search input {
+    width: 300px;
+  }
+  .upcoming-event .kitchen-sink .item h5 {
+    font-size: 20px;
+  }
+
+  .preview-card {
+    margin-right: 0;
+  }
+  .form .form-groups {
+    flex-direction: column;
+    width: max-content;
+  }
+  .form .form-groups .form-group:not(:last-child) {
+    margin-right: 0;
+  }
+  .form .form-group {
+    width: 90vw;
+  }
+
+  .search.wide input {
+    width: 90vw;
+  }
+
+  .search.search-button {
+    flex-direction: column;
+    width: 90vw;
+  }
+
+  .search.search-button .ui-button {
+    margin-top: 7px;
+    width: 90vw;
+  }
+
+  .focus-popover-menu .menu {
+    right: unset;
+    left: 0px;
+  }
+  .form input,
+  select,
+  option {
+    width: 90vw;
+    background-color: var(--granny-smith-apple);
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: 700;
+    color: var(--midnight-green-eagle-green);
+    border: none;
+    margin: 0 auto;
+  }
+
+  .button-group a {
+    font-size: 15px;
+  }
+}

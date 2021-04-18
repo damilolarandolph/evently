@@ -79,3 +79,24 @@
   width: 100%;
   justify-content: space-between;
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .layout {
+    flex-direction: column-reverse;
+    height: max-content;
+  }
+
+  .text-container h3 {
+    font-size: 50px;
+  }
+
+  .auth-form {
+    margin: 10px auto 30px auto;
+    padding: 0px 8px;
+  }
+
+  .side-image {
+    height: 200px;
+    flex: unset;
+  }
+}

@@ -81,3 +81,12 @@
     transform: rotate(360deg);
   }
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  form {
+    width: max-content;
+  }
+  .layout {
+    width: min-content;
+  }
+}
