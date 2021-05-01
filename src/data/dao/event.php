@@ -164,7 +164,7 @@ class EventDAO extends DAO
         $timeStamp = time();
         $q = "SELECT * FROM {$this->table}
         WHERE start_time > ? 
-        ORDER BY start_time DESC
+        ORDER BY start_time ASC
         LIMIT ?
         ";
 
