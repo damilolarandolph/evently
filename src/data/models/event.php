@@ -107,7 +107,7 @@ class Event extends Model implements JsonSerializable
             case "end_time":
                 $this->endTime = $value;
                 break;
-            case "meetingLink":
+            case "meeting_link":
                 $this->meetingLink = $value;
                 break;
             case "organizer":
@@ -118,6 +118,9 @@ class Event extends Model implements JsonSerializable
                 break;
             case "category":
                 $this->category =  $value;
+                break;
+            case "is_online":
+                $this->isOnline = $value == 1;
                 break;
         }
     }
