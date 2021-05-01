@@ -8,8 +8,8 @@
     </ul>
     <ul class="links">
         <li class="header">Join Us</li>
-        <li><a href="/signin">Sign In</a></li>
-        <li><a href="/org-signup">Become an Organizer</a></li>
-        <li><a href="/signup">Sign Up</a></li>
+        <li><a href="/signin.php">Sign In</a></li>
+        <li><a href="/org-signup.php">Become an Organizer</a></li>
+        <li><a href="/signup.php">Sign Up</a></li>
     </ul>
 </footer>
