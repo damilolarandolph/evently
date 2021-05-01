@@ -8,6 +8,7 @@ function buildOrganizerOptions()
                 <li class='fixed'><a>{$name}</a></li>
                 <li><a href='/dashboard.php'>Account</a></li>
                 <li><a href='/add-event.php'>Create Event</a></li>
+                <li><a href='/logout.php'>Logout</a></li>
             </ul> ";
 }
 
@@ -17,6 +18,7 @@ function buildPersonOptions()
     return "<ul class='menu'>
                 <li class='fixed'><a>{$name}</a></li>
                 <li><a href='/dashboard.php'>Account</a></li>
+                <li><a href='/logout.php'>Logout</a></li>
             </ul> 
                 
                 ";
@@ -53,9 +55,7 @@ function buildPersonOptions()
             echo "<button class='avatar focus-popover-menu'>
             <img class='avatar-img' src='/assets/images/placeholder_avatar.jpg'>
             {$options}
-        </button><form class='logout-form' method='POST' action='/logout.php'>
-                <button class='ui-button mini' type='submit'>Logout</button>
-                </form> ";
+        </button> ";
         }
         ?>
     </div>
