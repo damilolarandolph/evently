@@ -67,6 +67,25 @@ class ReservationDAO extends DAO
     }
 
     /**
+     * @param Person $person
+     * 
+     * @return Reservation[]
+     */
+    public function findAllForPerson($person)
+    {
+        $q = "SELECT * FROM {$this->table} WHERE person=?";
+        $stmt = $this->conn->prepare($q);
+        $stmt->execute(array($person->user->email));
+        $reservations = $stmt->fetchAll(PDO::FETCH_CLASS, "Reservation");
+
+        foreach ($reservations as $reservation) {
+            $reservation->person = $person;
+        }
+
+        return $reservations;
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return Reservation[]
