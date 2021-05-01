@@ -224,7 +224,7 @@ class EventDAO extends DAO
     {
 
         $time = time();
-        $q = "SELECT * FROM {$this->table} WHERE start_time > ? ORDER BY start_time DESC";
+        $q = "SELECT * FROM {$this->table} WHERE start_time > ? ORDER BY start_time ASC";
         $stmt = $this->conn->prepare($q);
         $stmt->execute(array($time));
         $res = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
@@ -269,16 +269,12 @@ class EventDAO extends DAO
         $stmt = $this->conn->prepare($q);
         $stmt->execute(array($time));
         $res = $stmt->fetchAll(PDO::FETCH_CLASS, "Event");
+        $res = array_filter($res, function ($item) {
+            return $item->getTicketsLeft() !== 0;
+        });
         $accResult = array();
 
-        for ($idx = 0; $idx < 12 && $idx < count($res);) {
-            if ($res[$idx]->getTicketsLeft() === 0) {
-                continue;
-            }
-            ++$idx;
-            if ($idx < 4) {
-                continue;
-            }
+        for ($idx = 4; $idx < count($res); ++$idx) {
 
             array_push($accResult, $res[$idx]);
         }
