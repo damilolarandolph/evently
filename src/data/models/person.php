@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/./model.php";
+require_once __DIR__ . "/../dao/reservation.php";
 require_once __DIR__ . "/user.php";
 
 class Person extends Model
@@ -14,10 +15,18 @@ class Person extends Model
     /** @var string */
     public $lastName;
 
+    /** @var ReservationDAO */
+    private $reservationDAO;
+
+    /** @var Reservation[] */
+    private $reservations;
+
     public function __construct()
     {
         parent::__construct("person");
+        $this->reservationDAO = new ReservationDAO(PDOConn::instance());
     }
+
 
     /**
      * 
@@ -46,5 +55,37 @@ class Person extends Model
         } else if ($name === "last_name") {
             $this->lastName = $value;
         }
+    }
+
+    public function getReservations()
+    {
+        if ($this->reservations == NULL) {
+            $this->reservations = $this->reservationDAO->findAllForPerson($this);
+        }
+        return $this->reservations;
+    }
+
+    public function getUpcomingReservations()
+    {
+        $time = time();
+
+        $reservations = $this->getReservations();
+        $result = array_filter($reservations, function ($reservation) use ($time) {
+            return $reservation->getEvent()->startTime > $time;
+        });
+
+        return $result;
+    }
+
+    public function getPastReservations()
+    {
+        $time = time();
+        $reservations = $this->getReservations();
+
+        $result = array_filter($reservations, function ($reservation) use ($time) {
+            return $reservation->getEvent()->startTime < $time;
+        });
+
+        return $result;
     }
 }
