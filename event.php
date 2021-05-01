@@ -29,7 +29,7 @@ require_once __DIR__ . "/src/routes/event.php";
                 <img src="<?php echo $event->image; ?>" />
             </div>
             <aside>
-                <h2 class="event-title"><?php echo $event->name; ?></h2>
+                <h2 class="event-title"><?php echo htmlspecialchars($event->name); ?></h2>
                 <ul class="badges event-badges">
                     <li class="badge">
                         <i class="fas fa-project-diagram"></i>
@@ -42,7 +42,7 @@ require_once __DIR__ . "/src/routes/event.php";
 
                 </ul>
                 <p class="event-details">
-                    <?php echo $event->description; ?>
+                    <?php echo htmlspecialchars($event->description); ?>
                 </p>
                 <?php
 
@@ -150,11 +150,14 @@ $speakersHTML
     </section>
     ";
     ?>
-
-    <section class="stats-sections">
+    <?php
+    if (!empty($isOrganizerOfEvent)) {
+        echo ' <section class="stats-sections">
         <h3>Attendee Information</h3>
         <table id="stats"></table>
-    </section>
+    </section>';
+    }
+    ?>
 
     <?php require_once __DIR__ . "/src/partials/footer.php" ?>
 </body>

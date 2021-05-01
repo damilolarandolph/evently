@@ -19,12 +19,13 @@ function genEventPreviewCard($event)
     $startTime = date("g:iA", $event->startTime);
     $endDate = $startDate === $endDate ? "" : " - " . $endDate;
     $location = $event->isOnline ? "Remote" : $event->location;
+    $name = htmlspecialchars($event->name);
     return "<a href='/event.php?event={$event->id}' class='preview-card'>
                 <div>
                     <img class='image' src='{$event->image}' />
                 </div>
                 <div class='content'>
-                    <h2 class='title'>{$event->name}</h2>
+                    <h2 class='title'>{$name}</h2>
                     <ul class='extra-details'>
                         <li>
                             <i class='far fa-clock'></i>
@@ -62,10 +63,10 @@ function genEventCountdownCard($event)
     $endDate = $startDate === $endDate ? "" : " - " . $endDate;
     $location = $event->isOnline ? "Remote" : $event->location;
     $reservationsLeft = $event->tickets == 0 ? "Unlimited" : $event->getTicketsLeft();
-
+    $name = htmlspecialchars($event->name);
     echo " <a href='/event.php?event={$event->id}' class='upcoming-event'>
             <main class='content'>
-                <h4 class='title'>{$event->name}</h4>
+                <h4 class='title'>{$name}</h4>
                 <img class='event-image' src='{$event->image}' />
                 <ul class='extra-details'>
                     <li>
