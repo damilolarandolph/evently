@@ -28,7 +28,9 @@ require_once __DIR__ . "/src/routes/home.php";
             <p>Our wide selection of events</p>
         </div>
         <?php
-        echo genEventCountdownCard($eventOfTheDay);
+        if ($eventOfTheDay) {
+            echo genEventCountdownCard($eventOfTheDay);
+        }
         ?>
     </section>
     <?php
