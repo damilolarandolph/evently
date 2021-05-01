@@ -68,7 +68,7 @@ require_once __DIR__ . "/src/routes/home.php";
 
     if (count($moreEvents) > 0) {
         echo "<section class='home-section'>
-        <h4 class='title'>Newly Added🆕</h4>
+        <h4 class='title'>More Events 🚀</h4>
         <div class='content'>
         ";
 
