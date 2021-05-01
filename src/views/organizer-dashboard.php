@@ -30,10 +30,7 @@ require_once __DIR__ . "/../utils/templates.php";
                 <i class="far fa-calendar-check"></i>
                 <span>Past Events</span>
             </a>
-            <a class="item">
-                <i class="far fa-user-circle"></i>
-                <span>Profile</span>
-            </a>
+
         </aside>
         <main id="sidebar-content" class="main-content sidebar-routes">
             <div class="route">
@@ -57,9 +54,7 @@ require_once __DIR__ . "/../utils/templates.php";
                 </ul>
 
             </div>
-            <div class="route">
-                How are you
-            </div>
+
         </main>
     </div>
 
