@@ -81,7 +81,7 @@ function renderResults(data) {
         let endDate = to.format("Do MMMM YYYY");
         let fromTime = from.format("hh:mm a");
         let toTime = to.format("hh:mm a");
-        return genCard(item.id, item.image, item.name, fromTime, toTime, fromDate, endDate, "remote")
+        return genCard(item.id, item.image, item.name, fromTime, toTime, fromDate, endDate, item.isOnline ? "Remote" : item.location)
     }).join("");
 
 }
