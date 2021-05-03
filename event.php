@@ -667,6 +667,12 @@ require_once __DIR__ . "/src/routes/event.php";
                 <span class='title'>Location</span>
                 <div class='body'>{$event->location}</div>
             </li>";
+            } else {
+                echo "
+            <li class='card mini'>
+                <span class='title'>Location</span>
+                <div class='body'>{$event->meetingLink}</div>
+            </li>";
             }
             ?>
             <?php
@@ -726,15 +732,16 @@ $speakersHTML
     </section>
     <?php
 
-    if (!$event->isOnline)
+    if (!$event->isOnline) {
         $encodedUrl = urlencode($event->location);
-    echo "
+        echo "
     <section class='map-section'>
         <iframe  loading='lazy' allowfullscreen
          src='https://www.google.com/maps/embed/v1/place?key=$googleKey&q=$encodedUrl'>
         </iframe>
     </section>
     ";
+    }
     ?>
     <?php
     if (!empty($isOrganizerOfEvent)) {
